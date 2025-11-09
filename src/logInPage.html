@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Selling_Book_Managment</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./css/logInPage.css" />
+    <link rel="stylesheet" href="./css/navBar.css" />
+    <script src="js/logIn.js" defer></script>
+    <script src="./js/navBar.js" defer></script>
+  </head>
+
+  <body>
+    <header>
+      <!-- Thanh điều hướng -->
+      <nav class="NavBar" id="nav-bar">
+        <div class="Nav_links" id="nav-links">
+          <a class="Nav_Btn" href="index.html">Trang chủ</a>
+          <a class="Nav_Btn" href="Product.html">Sản phẩm</a>
+          <a class="Nav_Btn" href="index.html#About">Giới thiệu</a>
+          <div class="Icon_user" id="icon-user">
+            <i class="fa-solid fa-user"></i>
+            <div class="User_menu" id="menu-user"></div>
+          </div>
+        </div>
+        <div class="Hamburger" id="hamburger">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+      </nav>
+    </header>
+    <div class="container">
+      <div class="signUpForm" style="max-width: 300px; width: 100%;">
+        <div class="welcome">
+          <i class="fa-solid fa-book" id="BookImage"></i>
+          <span> WELCOME! </span>
+        </div>
+
+        <div>
+          <input type="text" placeholder="Tên đăng nhập" id="username" />
+        </div>
+
+        <div class="form-group">
+          <input type="password" placeholder="Mật khẩu" id="password" />
+          <i class="fa-solid fa-eye-slash" id="eyeIcon-Password"></i>
+        </div>
+
+        <div>
+          <button id="logInButton">Đăng nhập</button>
+        </div>
+
+        <!-- <div>
+        <small id="error" style="display:none; color:red;">Sai tài khoản hoặc mật khẩu!</small>
+      </div> -->
+        <div class="question">
+          <span> Bạn chưa có tài khoản? </span>
+        </div>
+
+        <div class="noAccount">
+          <a href="./signUpPage.html"><button>Đăng ký</button></a>
+        </div>
+
+        <div class="blackLine"></div>
+      </div>
+    </div>
+  </body>
+</html>

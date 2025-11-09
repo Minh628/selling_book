@@ -1,0 +1,348 @@
+/* General styles */
+body {
+    font-family: sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+}
+
+.admin_container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar styles */
+.admin_sidebar {
+    width: 250px;
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.admin_sidebar h1 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.admin_menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.admin_menu li a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+}
+
+.admin_menu li a:hover,
+.admin_menu li a.active {
+    background-color: #555;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    text-align: center;
+}
+
+.btn-logout {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Main content styles */
+.admin_main {
+    flex-grow: 1;
+    padding: 2rem;
+    background-color: #fff;
+}
+
+/* Admin Filters */
+.admin-filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+#admin-search-name,
+#admin-search-category {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+#admin-search-name {
+    flex-grow: 1;
+}
+
+/* Products styles */
+.Product_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product_container {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 1rem;
+    margin: 1rem 0;
+    /* Adjusted margin */
+}
+
+.btn-add {
+    background-color: #007bff;
+    color: white;
+    border-radius: 15px;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.product-table img {
+    max-width: 50px;
+    height: auto;
+    border-radius: 4px;
+}
+
+.status-visible {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.status-hidden {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.action-buttons button {
+    margin-right: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-edit {
+    background-color: #ffc107;
+}
+
+.btn-toggle-status {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+.pagination_container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.pagination-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pagination-item {
+    margin: 0;
+}
+
+.pagination-item a {
+    display: block;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: #333;
+    background-color: white;
+    border-right: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+}
+
+.pagination-item:last-child a {
+    border-right: none;
+}
+
+.pagination-item a:hover,
+.pagination-item.active a {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination-item.active a {
+    font-weight: bold;
+    cursor: default;
+}
+
+/* Orders styles */
+.order_container {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.order_menu_container {
+    margin-bottom: 1rem;
+}
+
+.order_menu {
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    padding: 1rem;
+}
+
+.form-group {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.form-control {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    flex: 1;
+}
+
+#search.form-control {
+    flex: 2;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+/* Modal styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+}
+
+.modal-content .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.modal-content .form-group label {
+    font-weight: bold;
+}
+
+.modal-content .form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.btn-save {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-cancel {
+    background-color: #6c757d;
+    color: white;
+}
+
+.category-select {
+    padding: 12px 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    color: #333;
+    background-color: #fff;
+    transition: all 0.3s ease;
+    width: 100%;
+    /* Cho rộng bằng input */
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%23000000' height='14' viewBox='0 0 24 24' width='14' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 14px;
+}
+
+.category-select:hover {
+    border-color: #000;
+    /* Viền đen khi hover */
+}
+
+.category-select:focus {
+    border-color: #000;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+    /* Hiệu ứng đen khi focus */
+    outline: none;
+}

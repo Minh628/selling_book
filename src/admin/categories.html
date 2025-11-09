@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="admin_global.css" />
+    <link rel="stylesheet" href="sidebar.css" />
+    <link rel="stylesheet" href="categories.css" />
+    <link rel="stylesheet" href="responsive.css" />
+    <script src="auth.js" defer></script>
+    <script src="sidebar.js" defer></script>
+    <script src="categories.js" defer></script>
+    <script src="admin_login.js" defer></script>
+</head>
+
+<body>
+    <button class="menu-toggle">☰</button>
+    <div class="admin_container">
+        <aside class="admin_sidebar">
+            <div>
+                <h1>Bảng quản lý Admin</h1>
+            </div>
+            <div class="admin_menu">
+                <ul>
+                    <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                    <li><a href="products.html" class="nav-link">Sản phẩm</a></li>
+                    <li><a href="orders.html" class="nav-link">Đơn hàng</a></li>
+                    <li>
+                        <a href="categories.html" class="nav-link active">Danh mục</a>
+                    </li>
+                    <li><a href="customer.html" class="nav-link">Khách hàng</a></li>
+                    <li><a href="inventory.html" class="nav-link">Kho hàng</a></li>
+                    <li><a href="stockin.html" class="nav-link">Nhập hàng</a></li>
+                    <li>
+                        <a href="manage-price.html" class="nav-link">Quản lý giá bán</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="sidebar-footer">
+                <h2>Xin chào Admin!</h2>
+                <button class="btn-logout">Đăng xuất</button>
+            </div>
+        </aside>
+
+        <main class="admin_main">
+            <section class="category-page">
+                <div class="category-header">
+                    <h2>Danh mục sản phẩm</h2>
+                </div>
+
+                <!-- Thanh tìm kiếm + nút thêm -->
+                <div class="category-toolbar">
+                    <input type="text" id="searchCategory" placeholder="🔍 Tìm kiếm theo tên danh mục..." />
+                    <button id="openCategoryModal" class="category-btn-add">
+                        ➕ Tạo danh mục
+                    </button>
+                </div>
+
+                <!-- Bảng danh mục -->
+                <div class="category-table-container">
+                    <table class="category-table">
+                        <thead>
+                            <tr>
+                                <th>Tên danh mục</th>
+                                <th>Mô tả</th>
+                                <th>Trạng thái</th>
+                                <th>Chức năng</th>
+                            </tr>
+                        </thead>
+                        <tbody id="categoryTableBody"></tbody>
+                    </table>
+                </div>
+                <div id="pagination" class="pagination"></div>
+            </section>
+
+            <!-- Popup thêm danh mục -->
+            <div class="popup-overlay" id="popupOverlay">
+                <div class="popup">
+                    <h3>Tạo danh mục mới</h3>
+                    <form class="popup-form" id="popupForm">
+                        <label for="categoryName">Tên danh mục:</label>
+                        <input type="text" id="categoryName" placeholder="Nhập tên danh mục..." required />
+
+                        <label for="categoryDesc">Mô tả:</label>
+                        <textarea id="categoryDesc" placeholder="Nhập mô tả danh mục..." rows="4"></textarea>
+
+                        <label for="categoryStatus">Trạng thái:</label>
+                        <select id="categoryStatus">
+                            <option value="visible">Hiển thị</option>
+                            <option value="hidden">Ẩn</option>
+                        </select>
+
+                        <div class="popup-buttons">
+                            <button type="submit" class="btn-save">💾 Lưu</button>
+                            <button type="button" id="cancelPopup" class="btn-cancel">
+                                Hủy
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

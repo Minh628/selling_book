@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý giá bán</title>
+    <link rel="stylesheet" href="admin_global.css" />
+    <link rel="stylesheet" href="manage-price.css" />
+    <link rel="stylesheet" href="sidebar.css" />
+    <link rel="stylesheet" href="responsive.css" />
+    <script src="auth.js" defer></script>
+    <script src="sidebar.js" defer></script>
+    <script src="manage-price.js" defer></script>
+    <script src="admin_login.js" defer></script>
+</head>
+
+<body>
+    <button class="menu-toggle">☰</button>
+    <div class="admin_container">
+        <aside class="admin_sidebar">
+            <div>
+                <h1>Bảng quản lý Admin</h1>
+            </div>
+            <div class="admin_menu">
+                <ul>
+                    <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                    <li><a href="products.html" class="nav-link">Sản phẩm</a></li>
+                    <li><a href="orders.html" class="nav-link">Đơn hàng</a></li>
+                    <li><a href="categories.html" class="nav-link">Danh mục</a></li>
+                    <li><a href="customer.html" class="nav-link">Khách hàng</a></li>
+                    <li><a href="inventory.html" class="nav-link">Kho hàng</a></li>
+                    <li><a href="stockin.html" class="nav-link">Nhập hàng</a></li>
+                    <li>
+                        <a href="manage-price.html" class="nav-link active">Quản lý giá bán</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="sidebar-footer">
+                <h2>Xin chào Admin!</h2>
+                <button class="btn-logout">Đăng xuất</button>
+            </div>
+        </aside>
+
+        <main class="admin_main">
+            <h1>Quản lý giá bán</h1>
+            <div class="order_container">
+                <form id="filterForm">
+                    <div class="form-group">
+                        <input type="text" id="searchInput" class="form-control" placeholder="🔍 Tìm kiếm sản phẩm..." />
+                        <select id="categoryFilter" class="form-control">
+                            <option value="all">Tất cả loại sản phẩm</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Hiển thị tỷ lệ mặc định -->
+            <div id="defaultProfitContainer" class="hidden" style="margin: 0 30px 12px 30px">
+                <p>
+                    Tỷ lệ lợi nhuận mặc định: <span id="defaultProfit">0%</span>
+                </p>
+                <button id="editProfitBtn">Sửa tỷ lệ</button>
+            </div>
+
+            <div class="table-container">
+                <table id="productTable">
+                    <thead>
+                        <tr>
+                            <th>Tên sản phẩm</th>
+                            <th>Loại</th>
+                            <th>Giá vốn</th>
+                            <th>% Lợi nhuận</th>
+                            <th>Giá bán</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Dữ liệu sẽ được chèn vào đây bởi JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="pagination-controls">
+                <button id="prevPage" disabled>&laquo; Trước</button>
+                <div id="pageNumbers"></div>
+                <button id="nextPage" disabled>Sau &raquo;</button>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

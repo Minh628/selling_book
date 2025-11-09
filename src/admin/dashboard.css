@@ -1,0 +1,302 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Dashboard styles */
+.dashboard_container {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.381), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 1rem;
+}
+
+.admin_main h1 {
+    color: #0660ba;
+}
+
+.content_card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    gap: 1rem;
+}
+
+.card {
+    display: flex;
+    height: 50px;
+    width: 150px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 1rem;
+    margin: 1rem;
+    white-space: nowrap;
+    text-align: left;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    cursor: pointer;
+}
+
+#revenue_card {
+    border-left: rgb(197, 255, 110) 5px solid;
+}
+
+#customer_card {
+    border-left: rgb(99, 216, 255) 5px solid;
+}
+
+#order_card {
+    border-left: rgb(255, 65, 65) 5px solid;
+}
+
+#product_card {
+    border-left: rgb(182, 145, 255) 5px solid;
+}
+
+/* Nút Doanh Thu */
+.dashboard_report_container {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.381), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 1.5rem;
+    margin-top: 20px;
+    background-color: #fcfcfc;
+    animation: fadeIn 0.4s ease;
+}
+
+/* Hiệu ứng xuất hiện */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dashboard_report_container p {
+    font-size: 0.95rem;
+    color: #6d6d6d;
+    margin-bottom: 1.5rem;
+}
+
+.report-value {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+    padding: 12px 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.report-value span {
+    color: black;
+}
+
+.report-value strong {
+    font-weight: 600;
+    color: black;
+}
+
+/* Kiểu đặc biệt cho dòng Lợi nhuận (profit) */
+.report-value.profit {
+    background-color: #e6f7ee;
+}
+
+.report-value.profit strong {
+    color: #008a00;
+    font-size: 1.4rem;
+}
+
+.profit-text {
+    color: #008a00;
+    font-weight: bold;
+}
+
+/* CSS cho 3 Đơn hàng gần nhất */
+/* Đường kẻ phân cách */
+.report-divider {
+    border: 0;
+    border-top: 1px solid #cacaca;
+    margin: 10px 0;
+}
+
+.dashboard_report_container h2 {
+    color: #0660ba;
+    margin-bottom: 10px;
+}
+
+/* Danh sách 3 đơn hàng */
+.report-recent-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.report-recent-list li {
+    display: flex;
+    padding: 10px 12px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    border-left: 3px solid #0660ba;
+}
+
+/* ID đơn hàng */
+.report-recent-list .recent-id {
+    font-weight: bold;
+    color: #0660ba;
+    flex-basis: 25%;
+}
+
+/* Tên khách */
+.report-recent-list .recent-name {
+    flex-basis: 45%;
+    color: black;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Tổng tiền */
+.report-recent-list .recent-total {
+    font-weight: 600;
+    flex-basis: 30%;
+    text-align: right;
+    color: #008a00;
+}
+
+/* Nút Khách Hàng */
+/* Layout 2 cột cho báo cáo khách hàng */
+.report-columns {
+    display: flex;
+    gap: 20px;
+}
+
+.report-column {
+    flex: 1;
+    padding: 0 15px;
+}
+
+/* Thêm đường viền ngăn cách giữa 2 cột */
+.report-column:first-child {
+    border-right: 1px solid #eee;
+    padding-left: 0;
+}
+
+.report-column:last-child {
+    padding-right: 0;
+}
+
+.report-column h4 {
+    margin-top: 0;
+    color: black;
+}
+
+/* Chú thích nhỏ (Đang giao, v.v.) */
+.report-column .note {
+    font-size: 0.85rem;
+    color: #777;
+    margin-top: -10px;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+/* Danh sách khách hàng gần đây */
+.report-column ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.report-column ul li {
+    margin-bottom: 10px;
+    padding: 24px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+
+/* Khối hiển thị Top Spender */
+.top-spender {
+    text-align: center;
+    padding: 20px;
+    background-color: #f3f3f3;
+    border-radius: 8px;
+}
+
+.top-spender strong {
+    display: block;
+    font-size: 1.3rem;
+    color: #58abff;
+    margin-bottom: 10px;
+}
+
+.top-spender .profit-text {
+    font-size: 1.6rem;
+}
+
+/* Nút Đơn Hàng */
+
+/* Kiểu dáng cho các hộp thống kê (Tổng đơn, Đơn đã giao) */
+.stat-box {
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border-left: 4px solid #0660ba;
+}
+
+.stat-box span {
+    color: #555;
+}
+
+.stat-box strong {
+    display: block;
+    font-size: 2rem;
+    color: #0660ba;
+}
+
+/* Kiểu riêng cho hộp thống kê 'delivered' */
+.stat-box.delivered {
+    border-left-color: #008a00;
+}
+
+.stat-box.delivered strong {
+    color: #008a00;
+}
+
+@media (max-width: 768px) {
+    .report-columns {
+        flex-direction: column;
+    }
+
+    /*
+   * Xóa đường viền bên phải khi xếp chồng
+   * (vì không còn 2 cột song song nữa)
+   */
+    .report-column:first-child {
+        border-right: none;
+        padding-right: 0;
+    }
+}
+
+/* Nút Sản Phẩm */
+.product-sales-list li .recent-name {
+    flex-basis: 75%;
+    color: #333;
+}
+
+.product-sales-list li .recent-total {
+    flex-basis: 25%;
+    color: #008a00;
+    /* Màu xanh lá */
+}

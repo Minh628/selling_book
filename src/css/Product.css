@@ -1,0 +1,533 @@
+/* --- THIẾT LẬP CHUNG & CONTAINER --- */
+body {
+  background-color: #f8f8f8;
+  margin: 0;
+  padding: 0; 
+  font-family: Arial, sans-serif; /* Thêm font chữ mặc định */
+}
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+.hidden {
+  display: none !important;
+}
+
+/* --- HEADER --- */
+header h1 {
+  font-family: "Cinzel", sans-serif;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 3rem;
+  font-weight: bold;
+}
+header p {
+  text-align: center;
+  font-family: "Literata", sans-serif;
+  font-size: 1.2rem;
+  font-style: italic;
+}
+
+/* --- BỘ LỌC --- */
+.filter_control {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-direction: row;
+  background-color: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: #0b0b0b 8px 8px 8px;
+}
+.filter_control form {
+  display: flex;
+  flex-wrap: wrap; /* Thêm để tương thích mobile */
+  gap: 2rem; /* Giảm gap một chút */
+  font-size: 1.2rem; /* Điều chỉnh font */
+  width: 100%; /*Đảm bảo form chiếm đủ không gian*/
+}
+.filter_Price {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+/* Thêm CSS cho input để đẹp hơn */
+.filter_control input[type="text"],
+.filter_control input[type="number"],
+.filter_control select {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+/* --- HIỂN THỊ KẾT QUẢ RỖNG --- */
+.no-results-message {
+  text-align: center;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
+}
+.no-results-message h3 {
+  margin-top: 0;
+  color: #d9534f;
+}
+
+/* --- LƯỚI SÁCH (BOOK GRID) --- */
+#book-list p {
+    margin: 0;
+}
+#book-list h3 {
+    margin: 0;
+}
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+  min-height: 100px;
+}
+
+.book-card {
+  position: relative;
+  width: 250px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(180, 120, 80, 0.15);
+  background: #fff;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(180, 120, 80, 0.25);
+}
+
+/* --- ẢNH SÁCH --- */
+.book-card-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f8f8f8;
+}
+
+.book-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding-top: 25px;
+  border-radius: 30px;
+  transition: transform 0.3s ease;
+}
+
+.book-card:hover .book-card-image {
+  transform: scale(1.05);
+}
+
+/* --- OVERLAY PHỦ TOÀN BỘ CARD --- */
+.book-overlay {
+  position: absolute;
+  inset: 0; /* top, right, bottom, left = 0 */
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  flex-direction: column; /* các nút xếp dọc */
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 5;
+}
+
+.book-card:hover .book-overlay {
+  opacity: 1;
+}
+
+/* --- NÚT TRONG OVERLAY --- */
+.book-overlay button {
+  width: 140px;
+  background: #ffffff;
+  color: #333;
+  border: none;
+  padding: 10px 0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.book-overlay button:hover {
+  background: #007b55;
+  color: #fff;
+}
+
+/* --- PHẦN THÔNG TIN --- */
+.book-card-body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 10px;
+}
+
+.book-card-category {
+  font-size: 0.75rem; /* 12px */
+  font-weight: 600;
+  color: deepskyblue;
+  background-color: #e0e7ff;
+  padding: 0.125rem 0.5rem;
+  border-radius: 8px;
+  align-self: flex-start;
+}
+
+.book-card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.3;
+}
+
+.book-card-author {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 8px;
+  font-style: italic;
+}
+
+.book-card-price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #e63946;
+}
+
+/* --- PHÂN TRANG --- */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.pagination-list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.pagination-item {
+  margin: 0;
+}
+.pagination-item a {
+  display: block;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  color: #333;
+  background-color: white;
+  border-right: 1px solid #ddd;
+  transition: background-color 0.3s ease;
+}
+.pagination-item:last-child a {
+  border-right: none;
+}
+.pagination-item a:hover,
+.pagination-item.active a {
+  background-color: #ff6f61;
+  color: white;
+}
+.pagination-item.active a {
+  font-weight: bold;
+  cursor: default;
+}
+
+/* --- GIỎ HÀNG: NÚT BẤM NỔI (FAB) --- */
+.cart-fab {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 40;
+  cursor: pointer;
+}
+.cart-fab-wrapper {
+  width: 4rem;
+  height: 4rem;
+  background-color: black;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: white 0px 0px 10px;
+  transition: background-color 0.3s;
+}
+.cart-fab-wrapper:hover {
+  background-color: #ff6f61;
+}
+.cart-fab-icon {
+  width: 2rem;
+  height: 2rem;
+  color: white;
+}
+.cart-fab-counter {
+  position: absolute;
+  top: -0.25rem;
+  right: -0.25rem;
+  background-color: #b5d8e6;
+  color: white;
+  font-size: 0.75rem; /* 12px */
+  font-weight: 700;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+}
+
+/* --- GIỎ HÀNG: LỚP PHỦ VÀ SIDEBAR --- */
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 40;
+  transition: opacity 0.3s ease-in-out;
+}
+.cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  max-width: 448px;
+  background-color: #f1f5f9;
+  box-shadow: -10px 0 20px -10px rgba(0, 0, 0, 0.2);
+  z-index: 50;
+  transform: translateX(100%); /* Ẩn đi mặc định */
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem; /* Thêm padding chung */
+  box-sizing: border-box; /* Đảm bảo padding không làm tăng kích thước */
+}
+.cart-sidebar.open {
+  transform: translateX(0); /* Hiện ra khi có class 'open' */
+}
+
+/* --- GIỎ HÀNG: NỘI DUNG BÊN TRONG SIDEBAR --- */
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 15px;
+}
+.cart-header h2 {
+  margin: 0;
+  font-size: 1.5em;
+  color: #333;
+}
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 2em;
+  cursor: pointer;
+  color: #888;
+  padding: 0 5px;
+  line-height: 1;
+}
+.close-btn:hover {
+  color: #333;
+}
+.cart-items-container {
+  flex-grow: 1; /* Cho phép co giãn */
+  overflow-y: auto; /* Thêm thanh cuộn khi đầy */
+  margin-bottom: 15px;
+}
+.empty-cart-message {
+  text-align: center;
+  color: #777;
+  padding: 20px;
+}
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 0;
+  border-bottom: 1px dashed #eee;
+}
+.cart-item:last-child {
+  border-bottom: none;
+}
+.item-select-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-right: 5px;
+  flex-shrink: 0;
+}
+.cart-item-image {
+  width: 60px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.cart-item-details {
+  flex-grow: 1;
+  min-width: 0; /* Chống tràn flexbox */
+}
+.cart-item-details h4 {
+  margin: 0 0 5px 0;
+  font-size: 1em;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cart-item-price {
+  margin: 0 0 10px 0;
+  font-weight: bold;
+  color: #e44d26;
+}
+.cart-item-quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.quantity-btn {
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+.quantity-btn:hover {
+  background-color: #e0e0e0;
+}
+.item-quantity-input {
+  width: 40px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px 0;
+  -moz-appearance: textfield;
+}
+.item-quantity-input::-webkit-outer-spin-button,
+.item-quantity-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.remove-item-btn {
+  background: none;
+  border: none;
+  color: #dc3545;
+  cursor: pointer;
+  font-size: 1.4em;
+  padding: 5px;
+  line-height: 1;
+}
+.remove-item-btn:hover {
+  color: #a71d2a;
+}
+
+/* --- GIỎ HÀNG: TÓM TẮT VÀ THANH TOÁN --- */
+.cart-summary {
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+  text-align: right;
+}
+.cart-total h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.3em;
+  color: #333;
+}
+.total-amount {
+  color: #e44d26;
+  font-weight: bold;
+}
+.checkout-btn {
+  width: 100%;
+  padding: 12px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.checkout-btn:hover {
+  background-color: #218838;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 768px) {
+    .filter_control {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+        padding: 1.5rem;
+        box-shadow: #0b0b0b 4px 4px 4px;
+    }
+
+    .filter_control form {
+        flex-direction: column;
+        width: 100%;
+        gap: 1rem;
+    }
+
+    .filter_Price {
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+
+    .filter_control input, .filter_control select {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 660px) {
+  .book-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .book-card {
+    width: auto;
+  }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 2.2rem;
+    }
+    header p {
+        font-size: 1.1rem;
+    }
+    .book-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .book-card {
+        /* No longer needed for 2-column layout */
+    }
+}

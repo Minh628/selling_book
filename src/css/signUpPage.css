@@ -1,0 +1,103 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url("../images/signUpPage.jpg") no-repeat center center;
+  background-size: cover;
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.786);
+  height: 500px;
+  width: 90%;
+  max-width: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+}
+
+.container input {
+  margin-bottom: 20px;
+  width: 100%;
+  border-radius: 20px;
+  border-style: hidden;
+  padding: 15px;
+  text-align: center;
+  background-color: #ffe7c2;
+  font-size: 17px;
+  transition: 300ms;
+}
+.container input:focus {
+  outline: none;
+}
+.container input:hover {
+  background-color: #fddca9;
+}
+
+button {
+  width: 100%;
+  border-radius: 20px;
+  padding: 15px;
+  border-style: hidden;
+  margin-top: 10px;
+  background-color: #bfa279;
+  font-size: 17px;
+  transition: 300ms;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #b18f60;
+}
+
+.welcome {
+  font-size: 45px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+#BookImage {
+  margin-right: 10px;
+  font-size: 44px;
+}
+
+.form-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.form-group input {
+  width: 100%;
+}
+
+#eyeIcon-Password,
+#eyeIcon-repeatPassword {
+  font-size: 20px;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-100%);
+  cursor: pointer;
+}
+
+#signUpAnchor {
+  text-decoration: none;
+  color: black;
+}
+
+@media (max-width: 600px) {
+  .container {
+    width: 90%;
+    height: auto;
+    padding: 20px;
+  }
+}

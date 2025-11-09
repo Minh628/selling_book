@@ -1,0 +1,171 @@
+/* === CÀI ĐẶT CHUNG === */
+body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    background: #f5f9ff;
+    color: #333;
+}
+
+.admin_main {
+    flex: 1;
+    padding: 30px;
+}
+
+.admin_main h1 {
+    color: #1e88e5;
+    font-size: 26px;
+}
+
+.order_container {
+    margin-top: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Form */
+.form-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-control {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: 0.2s;
+    min-width: 200px;
+    /* Cho input rộng ra */
+}
+
+.form-control:focus {
+    border-color: #1e88e5;
+    outline: none;
+    box-shadow: 0 0 4px rgba(30, 136, 229, 0.4);
+}
+
+/* === KHUNG BẢNG CHÍNH (ĐƯỢC CẢI THIỆN) === */
+.table-container {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #dee2e6;
+    overflow: hidden;
+    margin: 0 0 30px 0;
+}
+
+.hidden {
+    display: none;
+}
+
+/* === CÁC TIỆN ÍCH (HIGHLIGHT, BUTTON) === */
+.highlight {
+    background: #fff3b0;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+.editBtn {
+    background: #0d6efd;
+    color: #fff;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+}
+
+.editBtn:hover {
+    background: #0b5ed7;
+}
+
+/* === CONTAINER TỶ LỆ LỢI NHUẬN === */
+#defaultProfitContainer {
+    background: #e3f2fd;
+    padding: 15px 20px;
+    border-radius: 10px;
+    border: 1px solid #90caf9;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 400px;
+    margin-bottom: 20px;
+}
+
+/* Text tỷ lệ */
+#defaultProfitContainer p {
+    margin: 0;
+    font-weight: 500;
+    font-size: 1rem;
+    color: #0d47a1;
+}
+
+/* Nút sửa tỷ lệ */
+#editProfitBtn {
+    background: #ff9800;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* ... (toàn bộ code css cũ của bạn) ... */
+
+/* === PHÂN TRANG (LẤY TỪ INVENTORY.CSS) === */
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pagination-controls button,
+.page-number {
+    background-color: white;
+    color: #555;
+    border: 1px solid #dcdfe6;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s;
+    font-size: 14px;
+    min-width: 35px;
+    text-align: center;
+}
+
+.pagination-controls button:hover:not(:disabled),
+.page-number:hover:not(.active) {
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+.pagination-controls button:disabled {
+    background-color: #f9fafb;
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+#pageNumbers {
+    display: flex;
+    gap: 5px;
+}
+
+.page-number.active {
+    background-color: #1976d2;
+    /* Màu xanh giống inventory */
+    color: white;
+    cursor: default;
+}

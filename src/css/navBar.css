@@ -1,0 +1,188 @@
+.NavBar {
+  font-family: Arial, sans-serif;
+  background-color: #e7ae5ad5;
+  display: flex;
+  justify-content: space-between; /* Căn chỉnh các mục */
+  align-items: center;
+  font-size: 14px;
+  padding: 0 80px;
+  height: 45px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.Nav_links {
+  display: flex;
+  align-items: center;
+}
+
+.Nav_Btn {
+  color: #fff;
+  text-decoration: none;
+  padding: 6px 16px;
+  margin: auto 8px;
+  border-radius: 20px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.Nav_Btn:hover {
+  background: #fcaf3bd5;
+}
+
+.Icon_user {
+  margin-left: 24px;
+  position: relative;
+  color: #fff;
+  font-size: 20px;
+}
+
+.Icon_user:hover {
+  cursor: pointer;
+}
+
+.Hamburger {
+  display: none; /* Ẩn mặc định trên desktop */
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Dropdown ẩn ban đầu */
+.User_menu {
+  position: absolute;
+  top: 30px;
+  left: -20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 8px 0;
+  min-width: 120px;
+  text-wrap: nowrap;
+  z-index: 20;
+
+  /* Trạng thái ẩn */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all 0.25s ease;
+}
+
+.User_menu.show {
+  /* Trạng thái hiện */
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.User_menu a {
+  text-decoration: none;
+  display: block;
+  margin: 10px 0;
+  padding: 0 16px;
+  color: #333;
+  font-size: 16px;
+  text-align: center;
+}
+
+.User_menu a:hover {
+  color: #f1bc6de6;
+}
+
+.User_menu a:first-child {
+  margin-top: 0;
+}
+
+.User_menu a:last-child {
+  margin-bottom: 0; /* bỏ khoảng trắng dư cho nút cuối (đăng xuất) */
+}
+
+.hi-name {
+  display: block;
+  padding: 0 16px;
+  text-align: center;
+  font-size: 14px;
+  /* font-weight: bold; */
+  color: white;
+}
+
+.name {
+  font-weight: bold;
+  color: white;
+}
+
+.name:hover {
+  cursor: pointer;
+  color: #ffe600;
+}
+
+@media (max-width: 700px) {
+  .NavBar {
+    padding: 0 24px; /* Tăng padding cho đẹp hơn */
+    height: 50px;
+    opacity: 0.9;
+  }
+
+  .Hamburger {
+    display: block; /* Hiện hamburger trên mobile */
+  }
+
+  .Nav_links {
+    display: none; /* Ẩn các link điều hướng */
+    position: absolute;
+    top: 50px; /* Ngay dưới navbar */
+    right: 0;
+    background-color: rgb(40 32 25 / 90%);
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .Nav_links.active {
+    display: flex; /* Hiện menu khi có class active */
+  }
+
+  .Nav_Btn {
+    padding: 12px 0;
+    width: 100%;
+    text-align: center;
+    margin: 4px 0;
+    border-radius: 0;
+  }
+
+  .Nav_Btn:hover {
+    background: #fcaf3bd5;
+  }
+
+  .Icon_user {
+    margin-left: 0;
+    margin-top: 12px;
+    font-size: 22px;
+  }
+
+  .User_menu {
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%); /* Căn giữa dropdown */
+    min-width: 150px;
+  }
+
+  .hi-name {
+    display: none; /* Ẩn lời chào mặc định */
+  }
+
+  /* Hiển thị lại lời chào trong menu mobile */
+  .Nav_links.active .hi-name {
+    display: block;
+    padding: 12px 0;
+    width: 100%;
+    text-align: center;
+    order: -1; /* Đưa lên đầu menu */
+  }
+}
+

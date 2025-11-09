@@ -1,0 +1,281 @@
+  body {
+    font-family: 'Cinzel', sans-serif;
+    background-color: #fff8e1;
+    /* margin: 0; */
+  }
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-top: 50px;
+  font-size: 32px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 40px auto;
+  width: 90%;
+  max-width: 1100px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  min-width: 350px;
+}
+
+.card h2 {
+  text-align: center;
+  color: #ff9800;
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: 600;
+  display: block;
+  margin-top: 15px;
+  color: #444;
+}
+
+input {
+  width: 100%;
+  padding: 10px 9px;
+  border: 1.5px solid #ddd;
+  border-radius: 10px;
+  margin-top: 5px;
+  transition: 0.2s;
+}
+
+input:focus {
+  border-color: #ff9800;
+  outline: none;
+  box-shadow: 0 0 5px #ffcc80;
+}
+
+button {
+  display: block;
+  margin: 25px auto 0;
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background-color: #fb8c00;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Giữ cố định thead, cuộn tbody --- */
+#orderTableContainer {
+  border: 1px solid #ffe0b2;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  overflow: hidden; /* ✅ để bo góc đẹp, không tràn viền */
+  max-height: 270px;
+}
+
+/* Bảng */
+#orderTable {
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed; /* ✅ giúp cột đều nhau khi cuộn */
+}
+
+/* Header cố định */
+#orderTable thead {
+  background-color: #fff3e0;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+/* Cuộn tbody riêng biệt */
+#orderBody {
+  display: block;
+  max-height: 230px; /* ✅ chiều cao cuộn */
+  overflow-y: auto;
+  width: 100%;
+}
+
+/* Cố định kích thước cột để header + body khớp */
+#orderBody tr,
+#orderTable thead tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+/* Ô trong bảng */
+th,
+td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ffe0b2;
+  white-space: nowrap;
+}
+
+/* Hover hàng */
+tr:hover {
+  background-color: #fff8e1;
+  cursor: pointer;
+}
+
+/* --- Thanh cuộn tùy chỉnh --- */
+#orderBody::-webkit-scrollbar {
+  width: 8px;
+}
+
+#orderBody::-webkit-scrollbar-track {
+  background: #fff7e6;
+  border-radius: 10px;
+}
+
+#orderBody::-webkit-scrollbar-thumb {
+  background: #ffc107a6;
+  border-radius: 10px;
+}
+
+#orderBody::-webkit-scrollbar-thumb:hover {
+  background: #ffb300;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ffe0b2;
+}
+
+th {
+  background-color: #fff3e0;
+}
+
+tr:hover {
+  background-color: #fff8e1;
+  cursor: pointer;
+}
+
+.price {
+  color: red;
+  font-weight: 600;
+}
+
+/* ORDER DETAIL - cho phép mở rộng theo nội dung */
+.order-detail {
+  /* bỏ max-height/overflow:hidden để phần này tự cao theo nội dung */
+  border: 1px solid #ffe0b2;
+  border-radius: 16px;
+  background: #fffdf5;
+  padding: 20px 18px;
+  margin-top: 20px;
+  box-shadow: 0 3px 10px rgba(255, 152, 0, 0.15);
+  transition: all 0.25s ease;
+  overflow: visible; /* cho phép mở rộng - không cắt nội dung */
+  height: auto;
+}
+
+/* Dòng thông tin */
+.order-detail p {
+  margin: 6px 0;
+  font-size: 15px;
+  color: #444;
+  line-height: 1.5;
+
+  /* Bảo đảm ngắt từ kể cả khi không có khoảng trắng */
+  word-wrap: break-word; /* cũ nhưng vẫn dùng */
+  overflow-wrap: anywhere; /* tốt cho trình duyệt hiện đại */
+  word-break: break-word; /* fallback */
+  white-space: normal;
+}
+
+/* DANH SÁCH SẢN PHẨM - cho scroll nếu nội dung nhiều */
+.order-items {
+  max-height: 180px; /* giữ nếu bạn muốn danh sách cuộn */
+  overflow-y: auto;
+  margin-top: 10px;
+  padding-right: 8px;
+  background: #fffaf0;
+  border-radius: 10px;
+  border: 1px solid #ffe0b2;
+}
+
+/* --- TÙY CHỈNH THANH CUỘN (SCROLLBAR) --- */
+.order-items::-webkit-scrollbar {
+  width: 8px;
+}
+
+.order-items::-webkit-scrollbar-track {
+  background: #fff7e6;
+  border-radius: 10px;
+}
+
+.order-items::-webkit-scrollbar-thumb {
+  background: #ffc107a6;
+  border-radius: 10px;
+}
+
+.order-items::-webkit-scrollbar-thumb:hover {
+  background: #ffb300;
+}
+
+.error {
+  border-color: red !important;
+  box-shadow: 0 0 4px red;
+}
+
+small {
+  color: red;
+  display: none;
+}
+
+/* .cancel-btn {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  /* ✅ Sửa để nút nằm giữa ô và không bị lệch */
+  /* display: inline-block;
+  margin: 0 auto;
+} */ 
+.cancel-btn {
+  display: inline-block;
+  margin: 0;
+  padding: 5px 10px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+
+
+.cancel-btn:hover {
+  background-color: #d93636;
+}
+
+/* #orderTable th:nth-child(4),
+#orderTable td:nth-child(4) {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+} */
+

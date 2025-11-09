@@ -1,0 +1,310 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.stockin-page {
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.stockin-header h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Toolbar: Search + Add Button */
+.stockin-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#stockin-search-name {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.stockin-btn-add {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.stockin-btn-add:hover {
+    background-color: #0056b3;
+}
+
+/* Filters */
+.stockin-filters {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.stockin-filters input[type="text"],
+.stockin-filters input[type="date"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Table */
+.stockin-table-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+/* Status */
+.stockin-status-select {
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 13px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.stockin-status-pending {
+    color: #b8860b;
+}
+
+.stockin-status-completed {
+    color: #28a745;
+}
+
+/* Action buttons */
+.stockin-edit-btn {
+    background-color: #ffc107;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.stockin-edit-btn:hover {
+    background-color: #e0a800;
+}
+
+/* Pagination */
+.stockin-pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.stockin-pagination-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    flex-wrap: wrap;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.stockin-pagination-item a {
+    display: block;
+    padding: 0.6rem 1rem;
+    text-decoration: none;
+    color: #333;
+    background-color: white;
+    border-right: 1px solid #ddd;
+    transition: background-color 0.3s ease;
+}
+
+.stockin-pagination-item:last-child a {
+    border-right: none;
+}
+
+.stockin-pagination-item.active a,
+.stockin-pagination-item a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Modal */
+.stockin-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.stockin-modal-overlay.active {
+    display: flex;
+}
+
+.stockin-modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 500px;
+}
+
+.stockin-modal-content h2 {
+    margin: 0 0 20px 0;
+    font-size: 20px;
+}
+
+.stockin-form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.stockin-form-group input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.stockin-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.stockin-btn-save {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.stockin-btn-cancel {
+    background-color: #6c757d;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+}
+
+.stockin-status-select:disabled {
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+}
+
+/* --- Trạng thái + nút Sửa --- */
+.status-edit-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stockin-edit-btn {
+    background-color: #ffc107;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    transition: opacity 0.2s ease, background-color 0.3s;
+}
+
+.stockin-edit-btn:hover {
+    background-color: #e0a800;
+}
+
+.stockin-edit-btn:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* ================CSS mới của Quý================ */
+.stockin-btn-delete {
+    background-color: #dc3545;
+    /* Màu đỏ */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.stockin-btn-delete:hover:not(:disabled) {
+    background-color: #c82333;
+    /* Màu đỏ đậm hơn khi hover */
+}
+
+.stockin-btn-delete:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.stockin-pagination-item.disabled a {
+    color: #999;
+    pointer-events: none;
+    cursor: not-allowed;
+    background-color: #f0f0f0;
+}
+
+/* Ghi đè hiệu ứng hover khi nút bị vô hiệu hóa */
+.stockin-pagination-item.disabled a:hover {
+    background-color: #f0f0f0;
+    color: #999;
+}
+
+/* Nút Sửa (Edit Details) - Mới */
+.stockin-btn-edit-details {
+    background-color: #007bff;
+    /* Màu xanh */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 5px;
+    /* Thêm khoảng cách với nút Xóa */
+}
+
+.stockin-btn-edit-details:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+
+.stockin-btn-edit-details:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    opacity: 0.6;
+}

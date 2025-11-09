@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="sidebar.css" />
+    <link rel="stylesheet" href="dashboard.css" />
+    <link rel="stylesheet" href="responsive.css" />
+    <script src="auth.js" defer></script>
+    <script src="sidebar.js" defer></script>
+    <script src="dashboard.js" defer></script>
+    <script src="admin_login.js" defer></script>
+</head>
+
+<body>
+    <button class="menu-toggle">☰</button>
+    <div class="admin_container">
+        <aside class="admin_sidebar">
+            <div>
+                <h1>Bảng quản lý Admin</h1>
+            </div>
+            <div class="admin_menu">
+                <ul>
+                    <li>
+                        <a href="dashboard.html" class="nav-link active">Dashboard</a>
+                    </li>
+                    <li><a href="products.html" class="nav-link">Sản phẩm</a></li>
+                    <li><a href="orders.html" class="nav-link">Đơn hàng</a></li>
+                    <li><a href="categories.html" class="nav-link">Danh mục</a></li>
+                    <li><a href="customer.html" class="nav-link">Khách hàng</a></li>
+                    <li><a href="inventory.html" class="nav-link">Kho hàng</a></li>
+                    <li><a href="stockin.html" class="nav-link">Nhập hàng</a></li>
+                    <li>
+                        <a href="manage-price.html" class="nav-link">Quản lý giá bán</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="sidebar-footer">
+                <h2>Xin chào Admin!</h2>
+                <button class="btn-logout">Đăng xuất</button>
+            </div>
+        </aside>
+        <main class="admin_main">
+            <h1>Dashboard</h1>
+            <div class="dashboard_container">
+                <div class="content_card">
+                    <div id="revenue_card" class="card">
+                        <h2>Doanh thu</h2>
+                    </div>
+                    <div id="customer_card" class="card">
+                        <h2>Khách hàng</h2>
+                    </div>
+                    <div id="order_card" class="card">
+                        <h2>Đơn hàng</h2>
+                    </div>
+                    <div id="product_card" class="card">
+                        <h2>Sản phẩm</h2>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

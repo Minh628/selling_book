@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thanh toán</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./css/Checkout.css" />
+    <link rel="stylesheet" href="./css/navBar.css" />
+    <script src="./js/Checkout.js" defer></script>
+    <script src="./js/navBar.js" defer></script>
+  </head>
+
+  <body>
+    <header>
+      <!-- Thanh điều hướng -->
+      <nav class="NavBar" id="nav-bar">
+        <div class="Nav_links" id="nav-links">
+          <a class="Nav_Btn" href="index.html">Trang chủ</a>
+          <a class="Nav_Btn" href="Product.html">Sản phẩm</a>
+          <a class="Nav_Btn" href="index.html#About">Giới thiệu</a>
+          <div class="Icon_user" id="icon-user">
+            <i class="fa-solid fa-user"></i>
+            <div class="User_menu" id="menu-user"></div>
+          </div>
+        </div>
+        <div class="Hamburger" id="hamburger">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container">
+      <h1>Thanh toán</h1>
+      <hr />
+
+      <div class="content">
+        <!-- Địa chỉ giao hàng -->
+        <div class="address">
+          <h2>Địa chỉ giao hàng</h2>
+          <label>
+            Số nhà & tên đường
+            <input
+              type="text"
+              id="address"
+              placeholder="VD: 138 An Dương Vương"
+            />
+          </label>
+          <label>
+            Thành phố
+            <input type="text" id="city" placeholder="VD: Hồ Chí Minh" />
+          </label>
+          <label>
+            Quốc tịch
+            <input type="text" id="nation" placeholder="VD: Trung Quốc" />
+          </label>
+
+          <h3>Chọn phương thức thanh toán</h3>
+          <div class="payment-methods">
+            <img
+              src="https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-MoMo-Square.png"
+              alt="MoMo"
+              class="method"
+              data-method="Momo"
+            />
+            <img
+              src="https://cdn.moveek.com/bundles/ornweb/partners/zalopay-icon.png"
+              alt="ZaloPay"
+              class="method"
+              data-method="zalopay"
+            />
+            <img
+              src="https://logowik.com/content/uploads/images/857_visa.jpg"
+              alt="Visa"
+              class="method"
+              data-method="Visa"
+            />
+            <div class="method cod selected" data-method="cod">
+              Thanh toán<br />khi nhận hàng
+            </div>
+          </div>
+
+          <input
+            type="text"
+            id="cardNumber"
+            placeholder="Số thẻ - VD: 4111 1111 1111 1111"
+          />
+          <button id="confirmBtn">Xác nhận</button>
+        </div>
+
+        <!-- Chi tiết hóa đơn -->
+        <div class="invoice-details">
+          <h2 class="invoice-details-header">Chi tiết hóa đơn</h2>
+          <div class="invoice-header">
+            <div class="product-name">Tên sản phẩm</div>
+            <div class="product-price">Giá</div>
+            <div class="product-qty">SL</div>
+          </div>
+
+          <div class="invoice-items"></div>
+
+          <div class="invoice-total">
+            Tổng thanh toán:
+            <span class="total-amount"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

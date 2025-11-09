@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rilassati</title>
+    <link rel="stylesheet" href="./css/Product.css" />
+    <link rel="stylesheet" href="./css/navBar.css" />
+    <link rel="stylesheet" href="./css/section_footer.css" />
+    <link rel="stylesheet" href="./css/popup_infor_book.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Merriweather:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="./js/Product.js" defer></script>
+
+    <script src="./js/navBar.js" defer></script>
+    <script src="./js/popup_infor_book.js" defer></script>
+  </head>
+  <body>
+    <!-- Thanh điều hướng -->
+    <nav class="NavBar" id="nav-bar">
+      <div class="Nav_links" id="nav-links">
+        <a class="Nav_Btn" href="index.html">Trang chủ</a>
+        <a class="Nav_Btn" href="Product.html">Sản phẩm</a>
+        <a class="Nav_Btn" href="index.html#About">Giới thiệu</a>
+        <div class="Icon_user" id="icon-user">
+          <i class="fa-solid fa-user"></i>
+          <div class="User_menu" id="menu-user"></div>
+        </div>
+      </div>
+      <div class="Hamburger" id="hamburger">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </nav>
+    <div class="container">
+      <header>
+        <h1>Rilassati</h1>
+        <p>Kho tàn tri thức của bạn</p>
+      </header>
+
+      <div class="filter_control">
+        <form>
+          <div class="search_Name">
+            <label for="search">Tìm kiếm:</label>
+            <input
+              type="text"
+              id="search"
+              name="search"
+              placeholder="Nhập tên sản phẩm..."
+            />
+          </div>
+          <div class="filter_Author">
+            <label for="author_filter">Tác giả:</label>
+            <input
+              type="text"
+              id="author_filter"
+              name="author"
+              placeholder="Nhập tên tác giả"
+            />
+          </div>
+          <div class="filter_Category">
+            <label for="category_filter">Danh mục:</label>
+            <select id="category_filter" name="category"></select>
+          </div>
+          <div class="filter_Price">
+            <div class="min_price">
+              <label for="min_price">Giá từ:</label>
+              <input
+                type="number"
+                id="min_price"
+                name="min_price"
+                placeholder="Giá thấp nhất"
+              />
+            </div>
+            <div class="max_price">
+              <label for="max_price">đến:</label>
+              <input
+                type="number"
+                id="max_price"
+                name="max_price"
+                placeholder="Không giới hạn"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div id="no-results" class="no-results-message hidden">
+        <h3>Không tìm thấy sản phẩm phù hợp</h3>
+        <p>Vui lòng thử lại với từ khóa hoặc bộ lọc khác.</p>
+      </div>
+
+      <main id="book-list" class="book-grid"></main>
+
+      <nav class="pagination" aria-label="Pagination">
+        <ul id="pagination-list" class="pagination-list"></ul>
+      </nav>
+    </div>
+
+    <div id="cart-icon" class="cart-fab">
+      <div class="cart-fab-wrapper">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="cart-fab-icon"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c.51 0 .962-.343 1.087-.835l1.858-6.441a.75.75 0 0 0-.7-1.022H5.21m0 0L3.272 3M6 20.25a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm12 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"
+          ></path>
+        </svg>
+      </div>
+      <span id="cart-count" class="cart-fab-counter">0</span>
+    </div>
+
+    <div id="cart-overlay" class="cart-overlay hidden"></div>
+
+    <aside id="cart-sidebar" class="cart-sidebar"></aside>
+
+    <!-- Popup -->
+    <div class="popup-overlay" id="popupOverlay">
+      <div class="popup">
+        <span class="close-btn" id="closePopup">&times;</span>
+
+        <!-- Ảnh bìa sách -->
+        <img id="popupImg" src="" alt="Ảnh bìa sách" />
+
+        <!-- Nội dung chi tiết -->
+        <div class="popup-content">
+          <h2 id="popupTitle">Tên sách</h2>
+          <div class="author" id="popupAuthor">Tác giả: Chưa cập nhật</div>
+          <div class="price" id="popupPrice">0 ₫</div>
+
+          <div class="popup-description">
+            <h4>Mô tả:</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, officia. Esse quibusdam suscipit eaque molestias ipsam labore saepe possimus aliquam quis vitae iusto sapiente eos, non hic? Labore, ipsum beatae.</p>
+          </div>
+
+          <div class="popup-footer">
+            <div class="quantity-control">
+              <button id="decreaseQty">-</button>
+              <span id="popupQuantity" class="qty-value">1</span> 
+              <button id="increaseQty">+</button>
+            </div>
+            <button id="popupAddBtn">🛒 Thêm vào giỏ hàng</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-container">
+        <!-- Cột 1 -->
+        <div>
+          <h4>RILASSATI</h4>
+          <p>
+            RILASSATI cung cấp đa dạng các thể loại sách khác nhau khác nhau
+            cùng với mức giá tốt đến tay khách hàng.
+          </p>
+          <p>Địa chỉ: aaaaaaaaaaaaaaa</p>
+          <p><span class="highlight">Hotline: 0000000000</span></p>
+          <p>Email: RILASSATI@gmail.com</p>
+          <p>Website:aaaaaaaaaaaaaa.com</p>
+        </div>
+
+        <!-- Cột 2 -->
+        <div>
+          <h4>VỀ RILASSATI</h4>
+          <ul>
+            <li><a href="#">Giới thiệu</a></li>
+            <li><a href="#">Liên hệ</a></li>
+            <li><a href="#">Tuyển dụng</a></li>
+          </ul>
+        </div>
+
+        <!-- Cột 3 -->
+        <div>
+          <h4>CHÍNH SÁCH</h4>
+          <ul>
+            <li><a href="#">Chính sách giao hàng</a></li>
+            <li><a href="#">Chính sách bảo hành</a></li>
+            <li><a href="#">Chính sách bảo mật</a></li>
+            <li><a href="#">Chính sách đổi trả</a></li>
+            <li><a href="#">Chính sách kiểm hàng</a></li>
+          </ul>
+        </div>
+
+        <!-- Cột 4 -->
+        <div>
+          <h4>HỖ TRỢ KHÁCH HÀNG</h4>
+          <ul>
+            <li><a href="#">Hướng dẫn mua hàng</a></li>
+            <li><a href="#">Hướng dẫn thanh toán</a></li>
+            <li><a href="#">Quy định mua hàng</a></li>
+            <li><a href="#">Quy trình tiếp nhận khiếu nại</a></li>
+            <li><a href="#">Quản lý giỏ hàng</a></li>
+          </ul>
+          <h4>KẾT NỐI VỚI CHÚNG TÔI</h4>
+          <div class="social-icons">
+            <a href="#"
+              ><img
+                src="https://cdn.gumic.vn/frontend/gumicvn/images/social_face.png"
+                alt="facebook"
+            /></a>
+            <a href="#"
+              ><img
+                src="https://cdn.gumic.vn/frontend/gumicvn/images/social_you.png"
+                alt="youtube"
+            /></a>
+          </div>
+          <h4>PHƯƠNG THỨC THANH TOÁN</h4>
+          <div class="payment-methods">
+            <img
+              src="https://img.icons8.com/ios-filled/50/ffffff/money.png"
+              alt="Tiền mặt"
+            />
+            <img
+              src="https://img.icons8.com/ios-filled/50/ffffff/bank-card-back-side.png"
+              alt="Internet Banking"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom"></div>
+    </footer>
+  </body>
+</html>

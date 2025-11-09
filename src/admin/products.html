@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quản lý Sản phẩm</title>
+
+  <link rel="stylesheet" href="admin_global.css" />
+  <link rel="stylesheet" href="sidebar.css" />
+  <link rel="stylesheet" href="product.css" />
+  <link rel="stylesheet" href="responsive.css" />
+  
+  <script src="categories.js" defer></script>
+  <script src="products.js" defer></script>
+  <script src="sidebar.js" defer></script>
+  <script src="admin_login.js" defer></script>
+</head>
+
+<body>
+  <button class="menu-toggle">☰</button>
+  <div class="admin_container">
+    <aside class="admin_sidebar">
+      <div>
+        <h1>Bảng quản lý Admin</h1>
+      </div>
+      <div class="admin_menu">
+        <ul>
+          <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+          <li><a href="products.html" class="nav-link active">Sản phẩm</a></li>
+          <li><a href="orders.html" class="nav-link">Đơn hàng</a></li>
+          <li><a href="categories.html" class="nav-link">Danh mục</a></li>
+          <li><a href="customer.html" class="nav-link">Khách hàng</a></li>
+          <li><a href="inventory.html" class="nav-link">Kho hàng</a></li>
+          <li><a href="stockin.html" class="nav-link">Nhập hàng</a></li>
+          <li><a href="manage-price.html" class="nav-link">Quản lý giá bán</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-footer">
+        <h2>Xin chào Admin!</h2>
+        <button class="btn-logout">Đăng xuất</button>
+      </div>
+    </aside>
+
+    <main class="admin_main">
+      <header class="Product_header">
+        <h1>Quản lý Sản phẩm</h1>
+        <button class="btn-add">+ Thêm sản phẩm</button>
+      </header>
+
+      <div class="order_container">
+        <form id="filterForm">
+          <div class="form-group">
+            <input type="text" id="admin-search-name" class="form-control" placeholder="🔍 Tìm theo tên sản phẩm..." />
+            <select id="admin-search-category" class="form-control">
+              <option value="all">Tất cả danh mục</option>
+            </select>
+          </div>
+        </form>
+      </div>
+
+      <div class="table-container">
+        <table class="product-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Image</th>
+              <th>Tên sản phẩm</th>
+              <th>Danh mục</th>
+              <th>Giá tiền</th>
+              <th>Số lượng (Đang bán)</th>
+              <th>Trạng thái</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+      <div class="pagination_container">
+        <ul class="pagination-list"></ul>
+      </div>
+    </main>
+  </div>
+
+  <!-- New Drawer UI -->
+  <div id="edit-product-modal" class="popup-overlay">
+    <div class="popup">
+      <div class="popup-header">
+        <h3>Chỉnh sửa sản phẩm</h3>
+        <button class="close-btn">&times;</button>
+      </div>
+      <form id="edit-product-form" class="popup-form">
+        <div class="form-group" id="product-selection-group">
+          <label for="edit-title-select">Tên sản phẩm (Lấy từ kho)</label>
+          <select id="edit-title-select">
+            <option value="">-- Chọn sản phẩm từ kho --</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="product-static-group" style="display: none;">
+          <label>Tên sản phẩm</label>
+          <input type="text" id="edit-title-static" readonly class="readonly-field" />
+        </div>
+
+        <div class="form-group">
+          <label for="edit-author">Tác giả</label>
+          <input type="text" id="edit-author" required />
+        </div>
+        <div class="form-group">
+          <label for="edit-description">Mô tả</label>
+          <textarea id="edit-description" rows="3" placeholder="Nhập mô tả chi tiết cho sản phẩm..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="edit-image">Link hình ảnh</label>
+          <input type="text" id="edit-image" required placeholder="Ví dụ: /images/dac-nhan-tam.jpg" />
+        </div>
+
+        <div class="form-group" id="quantity-input-group" style="display: none;">
+          <label for="edit-quantity-input">Số lượng bán (Phân bổ ra cửa hàng)</label>
+          <input type="number" id="edit-quantity-input" required min="0" />
+          <p id="quantity-real-hint">Tồn kho thực tế: -</p>
+        </div>
+
+        <div class="form-group">
+          <label>Danh mục</label>
+          <p id="edit-category-display" class="readonly-field">-</p>
+        </div>
+        <div class="form-group">
+          <label>Giá bán (Quyết định bởi 'Quản lý giá')</label>
+          <p id="edit-price-display" class="readonly-field">-</p>
+        </div>
+
+        <div class="form-group" id="quantity-display-group" style="display: none;">
+          <label>Số lượng đang bán</label>
+          <p id="edit-quantity-display" class="readonly-field">-</p>
+        </div>
+      </form>
+      <div class="popup-buttons">
+        <button type="submit" form="edit-product-form" class="btn-save">Lưu</button>
+        <button type="button" class="btn-cancel">Hủy</button>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

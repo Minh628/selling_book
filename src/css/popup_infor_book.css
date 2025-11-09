@@ -1,0 +1,311 @@
+/* ==== TOÀN TRANG ==== */
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #fdf6ec;
+  margin: 0;
+ }
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* ==== DANH SÁCH SẢN PHẨM ==== */
+.product-list {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.product {
+  background: #fff;
+  border-radius: 15px;
+  padding: 15px;
+  width: 200px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.product:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.product img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.product h3 {
+  font-family: "Merriweather", serif;
+  font-size: 16px;
+  margin: 10px 0 5px;
+  color: #333;
+}
+
+.product .price {
+  color: #e63946;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* ==== POPUP ==== */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-overlay.is-open {
+  display: flex;
+}
+
+.popup {
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: flex;
+  gap: 25px;
+  padding: 25px;
+  max-width: 750px;
+  animation: fadeIn 0.3s ease;
+  position: relative;
+}
+
+.popup img {
+  width: 250px;
+  border-radius: 15px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.popup-content {
+  flex: 1;
+}
+
+.popup-content h2 {
+  font-family: "Merriweather", serif;
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.popup-content .author {
+  color: #666;
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+
+.popup-content .price {
+  font-size: 20px;
+  font-weight: 600;
+  color: #e63946;
+  margin-bottom: 10px;
+}
+
+.popup-content .details {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.7;
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+}
+
+.popup-content .details b {
+  color: #222;
+}
+
+.popup-content .popup-footer{
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+/* ==== NÚT ĐÓNG ==== */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 22px;
+  color: #666;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+/* ==== HIỆU ỨNG POPUP ==== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ==== GIỎ HÀNG NỔI ==== */
+.cart-fab {
+  transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
+  will-change: transform;
+}
+
+.cart-fab.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cart-fab.pop {
+  animation: cartPop 400ms ease;
+}
+
+@keyframes cartPop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.25);
+  }
+  70% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ==== HÀNG DƯỚI: SỐ LƯỢNG + NÚT GIỎ ==== */
+.quantity-control {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 50px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #d15763, #e62c3f);
+  height: 44px;
+  box-shadow: 0 4px 10px rgba(255, 90, 0, 0.25);
+}
+
+.quantity-control button {
+  border: none;
+  width: 45px;
+  height: 44px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 18px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.quantity-control button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Ô hiển thị số lượng ở giữa */
+.quantity-control .qty-value {
+  width: 50px;
+  height: 100%;
+  background: #fffaf6;
+  color: #222;
+  font-weight: 600;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ==== NÚT THÊM VÀO GIỎ ==== */
+#popupAddBtn {
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  border: none;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  background: linear-gradient(135deg, #d15763, #e62c3f);
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  border-radius: 50px;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(255, 90, 0, 0.25);
+}
+
+#popupAddBtn:hover {
+  background: linear-gradient(135deg, #a71d2a, #a71d2a);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(255, 70, 0, 0.35);
+}
+
+#popupAddBtn:active {
+  transform: scale(0.97);
+}
+
+@media (max-width: 550px) {
+  .popup {
+    flex-direction: column;
+    padding: 15px;
+    max-width: 90%;
+  }
+
+  .popup img {
+    object-fit: contain;
+    width: 100%;
+    height: 250px;
+  }
+
+  .popup-content {
+    padding: 0;
+  }
+
+  .popup-content h2 {
+    font-size: 18px;
+  }
+
+  .popup-content .author {
+    font-size: 14px;
+  }
+
+  .popup-content .price {
+    font-size: 18px;
+  }
+
+  .popup-content .details {
+    font-size: 13px;
+  }
+
+  .popup-content .popup-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .quantity-control {
+    justify-content: center;
+  }
+}

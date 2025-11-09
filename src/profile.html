@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./css/profile.css" />
+    <link rel="stylesheet" href="./css/navBar.css" />
+    <link rel="stylesheet" href="./css/section_footer.css" />
+    <script src="./js/profile.js" defer></script>
+    <script src="./js/navBar.js" defer></script>
+  </head>
+  <header>
+    <!-- Thanh điều hướng -->
+    <nav class="NavBar" id="nav-bar">
+      <div class="Nav_links" id="nav-links">
+        <a class="Nav_Btn" href="index.html">Trang chủ</a>
+        <a class="Nav_Btn" href="Product.html">Sản phẩm</a>
+        <a class="Nav_Btn" href="index.html#About">Giới thiệu</a>
+        <div class="Icon_user" id="icon-user">
+          <i class="fa-solid fa-user"></i>
+          <div class="User_menu" id="menu-user"></div>
+        </div>
+      </div>
+      <div class="Hamburger" id="hamburger">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </nav>
+  </header>
+  <body>
+    <h1>Thông tin khách hàng</h1>
+
+    <div class="container">
+      <!-- Thông tin khách hàng -->
+      <div class="card">
+        <h2>Thông tin cá nhân</h2>
+        <label>Họ tên</label>
+        <input id="name" type="text" placeholder="VD: Nguyễn Thanh Thiện" />
+        <small id="err-name">Vui lòng nhập tên hợp lệ</small>
+
+        <label>Số điện thoại</label>
+        <input id="phone" type="tel" placeholder="VD: 0934129959" />
+        <small id="err-phone">Số điện thoại phải có 10 chữ số</small>
+
+        <label>Địa chỉ</label>
+        <input
+          id="address"
+          type="text"
+          placeholder="VD: 279 An Dương Vương, Phường Chợ Quán"
+        />
+        <small id="err-address">Địa chỉ không được để trống</small>
+
+        <label>Thành phố</label>
+        <input id="city" type="text" placeholder="VD: Hồ Chí Minh" />
+        <small id="err-city">Vui lòng nhập tên thành phố</small>
+
+        <label>Quốc tịch</label>
+        <input id="nation" type="text" placeholder="VD: Việt Nam" />
+        <small id="err-nation">Vui lòng nhập quốc tịch</small>
+
+        <button id="saveBtn">Lưu thông tin</button>
+      </div>
+
+      <!-- Lịch sử mua hàng -->
+      <div class="card">
+        <h2>Lịch sử mua hàng</h2>
+        <div id="orderTableContainer">
+          <table id="orderTable">
+            <thead>
+              <tr>
+                <th>Mã đơn</th>
+                <th>Ngày đặt</th>
+                <th>Tổng tiền</th>
+                <th>Trạng thái</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+            <tbody id="orderBody"></tbody>
+          </table>
+        </div>
+        <div id="orderDetail" class="order-detail">
+          <strong>Chọn mã đơn để xem chi tiết</strong>
+        </div>
+      </div>
+    </div>
+    <footer>
+    <div class="footer-container">
+      <!-- Cột 1 -->
+      <div>
+        <h4>RILASSATI</h4>
+        <p>
+          RILASSATI cung cấp đa dạng các thể loại sách khác nhau khác nhau
+          cùng với mức giá tốt đến tay khách hàng.
+        </p>
+        <p>Địa chỉ: aaaaaaaaaaaaaaa</p>
+        <p><span class="highlight">Hotline: 0000000000</span></p>
+        <p>Email: RILASSATI@gmail.com</p>
+        <p>Website:aaaaaaaaaaaaaa.com</p>
+      </div>
+
+      <!-- Cột 2 -->
+      <div>
+        <h4>VỀ RILASSATI</h4>
+        <ul>
+          <li><a href="#">Giới thiệu</a></li>
+          <li><a href="#">Liên hệ</a></li>
+          <li><a href="#">Tuyển dụng</a></li>
+        </ul>
+      </div>
+
+      <!-- Cột 3 -->
+      <div>
+        <h4>CHÍNH SÁCH</h4>
+        <ul>
+          <li><a href="#">Chính sách giao hàng</a></li>
+          <li><a href="#">Chính sách bảo hành</a></li>
+          <li><a href="#">Chính sách bảo mật</a></li>
+          <li><a href="#">Chính sách đổi trả</a></li>
+          <li><a href="#">Chính sách kiểm hàng</a></li>
+        </ul>
+      </div>
+
+      <!-- Cột 4 -->
+      <div>
+        <h4>HỖ TRỢ KHÁCH HÀNG</h4>
+        <ul>
+          <li><a href="#">Hướng dẫn mua hàng</a></li>
+          <li><a href="#">Hướng dẫn thanh toán</a></li>
+          <li><a href="#">Quy định mua hàng</a></li>
+          <li><a href="#">Quy trình tiếp nhận khiếu nại</a></li>
+          <li><a href="#">Quản lý giỏ hàng</a></li>
+        </ul>
+        <h4>KẾT NỐI VỚI CHÚNG TÔI</h4>
+        <div class="social-icons">
+          <a href="#"><img src="https://cdn.gumic.vn/frontend/gumicvn/images/social_face.png" alt="facebook" /></a>
+          <a href="#"><img src="https://cdn.gumic.vn/frontend/gumicvn/images/social_you.png" alt="youtube" /></a>
+        </div>
+        <h4>PHƯƠNG THỨC THANH TOÁN</h4>
+        <div class="payment-methods">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/money.png" alt="Tiền mặt" />
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/bank-card-back-side.png" alt="Internet Banking" />
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom"></div>
+  </footer>
+  </body>
+</html>

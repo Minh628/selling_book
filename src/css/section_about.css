@@ -1,0 +1,212 @@
+/*=======================Layout=====================================*/
+section.About {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.About_container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background-color: #37353e;
+  /*=======================Content=====================================*/
+}
+.Content {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+.Content h1 {
+  color: #d3dad9;
+  margin-bottom: 10px;
+  transition: all 1s ease;
+  font-family: "Cinzel", serif;
+  width: 100%;
+}
+.Content blockquote {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 20px;
+  border-left: 5px solid #ff9800;
+  border-radius: 10px;
+  color: #fff;
+  font-style: italic;
+  transition: ease 0.5s;
+}
+
+.Content blockquote:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+.About_container p {
+  color: #d3dad9;
+  line-height: 1.6;
+  text-align: left;
+  max-width: 600px;
+  font-family: "Literata", serif;
+}
+.About_container h1:hover {
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  scale: 1.1;
+  border-radius: 15px;
+  padding: 10px;
+  box-shadow: 10px 10px 10px rgb(255, 255, 255, 0.1);
+}
+/*=======================Images=====================================*/
+.Image_about {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cột */
+  grid-auto-rows: 150px; /* Chiều cao các dòng */
+  gap: 16px; /* Khoảng cách giữa các ảnh */
+  margin: 32px auto;
+  max-width: 800px;
+  justify-items: center;
+  align-items: center;
+}
+
+.Image_about img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Giúp hình ảnh không bị méo */
+  border-radius: 16px; /* Bo góc cho ảnh */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* Đổ bóng nhẹ */
+  transition: transform 0.3s;
+}
+
+.Image_about img:hover {
+  transform: scale(1.05); /* Hiệu ứng phóng to khi hover */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Nghệ thuật hơn: cho một số ảnh lớn hơn */
+.Image_about img:nth-child(3n) {
+  grid-row: span 2;
+  height: 100%;
+}
+.imgAbout:hover {
+  transform: scale(1.1);
+}
+/*=======================Responsive=====================================*/
+@media (max-width: 600px) {
+  .imgAbout {
+    max-width: 100px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .imgAbout {
+    max-width: 150px;
+  }
+}
+@media (max-width: 600px) {
+  .About_container {
+    padding: 15px;
+  }
+  .About_container h1 {
+    font-size: 1.5em;
+  }
+  .About_container p {
+    font-size: 1em;
+  }
+}
+@media (min-width: 601px) and (max-width: 1024px) {
+  .About_container {
+    padding: 18px;
+  }
+  .About_container h1 {
+    font-size: 1.8em;
+  }
+  .About_container p {
+    font-size: 1.1em;
+  }
+}
+@media (min-width: 1025px) {
+  .About_container {
+    padding: 20px;
+  }
+
+  .About_container h1 {
+    font-size: 2em;
+  }
+
+  .About_container p {
+    font-size: 1.2em;
+  }
+}
+@media (max-width: 600px) {
+  section.About {
+    height: auto;
+    padding: 30px 10px;
+  }
+
+  .About_container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+  }
+
+  .Content {
+    width: 100%;
+    align-items: center;
+  }
+
+  .Content h1 {
+    font-size: 1.6em;
+    margin-bottom: 15px;
+  }
+
+  .About_container p {
+    font-size: 1em;
+    line-height: 1.8;
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  .Image_about {
+    grid-template-columns: repeat(2, 1fr); /* 2 cột trên mobile */
+    grid-auto-rows: 120px;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .Image_about img {
+    border-radius: 12px;
+  }
+
+  .Content blockquote {
+    padding: 15px;
+    font-size: 0.9em;
+  }
+}
+
+/* --- Tablet: từ 601px đến 1024px --- */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .About_container {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .Image_about {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .Content h1 {
+    font-size: 1.8em;
+  }
+
+  .About_container p {
+    font-size: 1.1em;
+  }
+}
+
+/* --- Desktop lớn --- */
+@media (min-width: 1025px) {
+  .About_container {
+    flex-direction: row;
+    justify-content: center;
+    gap: 40px;
+  }
+}

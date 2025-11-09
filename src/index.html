@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="./admin/categories.js" defer></script>
+  <meta charset="UTF-8" />
+  <title>Selling_Book_Managment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="./css/global.css" />
+  <link rel="stylesheet" href="./css/section_about.css" />
+  <link rel="stylesheet" href="./css/section_home.css" />
+  <link rel="stylesheet" href="./css/section_category.css" />
+  <link rel="stylesheet" href="./css/section_footer.css" />
+  <link rel="stylesheet" href="./css/navBar.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <script src="./js/initialization.js " defer></script>
+  <script src="./js/script.js" defer></script>
+  <script src="./js/navBar.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <!-- Thanh điều hướng -->
+    <nav class="NavBar" id="nav-bar">
+      <div class="Nav_links" id="nav-links">
+        <a class="Nav_Btn" href="#Home">Trang chủ</a>
+        <a class="Nav_Btn" href="Product.html">Sản phẩm</a>
+        <a class="Nav_Btn" href="#About">Giới thiệu</a>
+        <div class="Icon_user" id="icon-user">
+          <i class="fa-solid fa-user"></i>
+          <div class="User_menu" id="menu-user"></div>
+        </div>
+      </div>
+      <div class="Hamburger" id="hamburger">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </nav>
+  </header>
+  <section id="Home">
+    <!-- phần Home -->
+    <div class="Home_container">
+      <h1>RILASSATI</h1>
+      <p class="subtitle">Enjoy reading - Enjoy life</p>
+      <div class="explore"><a href="Product.html">Khám phá ngay!</a></div>
+    </div>
+  </section>
+
+  <section id="About">
+    <!-- phần giới thiệu -->
+    <div class="About_container">
+      <div class="Content">
+        <h1>Rilassati – Nơi sách chạm đến tâm hồn</h1>
+        <p>
+          Chúng tôi mang đến những cuốn sách đa dạng và ý nghĩa, giúp bạn tìm
+          thấy niềm vui đọc sách mỗi ngày. Với trải nghiệm mua sắm trực tuyến
+          tiện lợi và thân thiện, Rilassati đồng hành cùng bạn trên hành trình
+          khám phá tri thức và nuôi dưỡng tâm hồn.
+        </p>
+        <blockquote>
+          “Khi bạn cầm một cuốn sách trong tay, bạn đang cầm cả một thế giới,
+          cả những trải nghiệm của hàng ngàn con người trước bạn, và bạn có
+          thể bước vào thế giới đó bất cứ lúc nào mà không bị giới hạn bởi
+          không gian hay thời gian.”
+        </blockquote>
+      </div>
+      <div class="Image_about">
+        <img src="./images/About_Image1.jpg" alt="BookImage" />
+        <img src="./images/About_Image2.jpg" alt="BookImage" />
+        <img src="./images/About_Image3.jpg" alt="BookImage" />
+        <img src="./images/About_Image.jpg" alt="BookImage" />
+        <img src="./images/About_Image4.jpg" alt="BookImage" />
+      </div>
+    </div>
+  </section>
+
+  <section id="Categories">
+    <h2>Khám phá theo thể loại</h2>
+    <div class="category-list">
+      <a href="Product.html" class="category-item">
+        <img src="./images/Bố Già.webp" alt="Tiểu thuyết" />
+        <p>Tiểu thuyết</p>
+      </a>
+      <a href="Product.html" class="category-item">
+        <img src="./images/Vũ Trụ Trong Vỏ Hạt Dẻ.jpg" alt="Phát triển bản thân" />
+        <p>Khoa Học</p>
+      </a>
+      <a href="Product.html" class="category-item">
+        <img src="./images/Cây Cam Ngọt Của Tôi.webp" alt="Thiếu nhi" />
+        <p>Văn Học</p>
+      </a>
+    </div>
+    <div class="category-btn">
+      <a href="Product.html" class="view-more-btn">Xem thêm sản phẩm</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <!-- Cột 1 -->
+      <div>
+        <h4>RILASSATI</h4>
+        <p>
+          RILASSATI cung cấp đa dạng các thể loại sách khác nhau khác nhau
+          cùng với mức giá tốt đến tay khách hàng.
+        </p>
+        <p>Địa chỉ: aaaaaaaaaaaaaaa</p>
+        <p><span class="highlight">Hotline: 0000000000</span></p>
+        <p>Email: RILASSATI@gmail.com</p>
+        <p>Website:aaaaaaaaaaaaaa.com</p>
+      </div>
+
+      <!-- Cột 2 -->
+      <div>
+        <h4>VỀ RILASSATI</h4>
+        <ul>
+          <li><a href="#">Giới thiệu</a></li>
+          <li><a href="#">Liên hệ</a></li>
+          <li><a href="#">Tuyển dụng</a></li>
+        </ul>
+      </div>
+
+      <!-- Cột 3 -->
+      <div>
+        <h4>CHÍNH SÁCH</h4>
+        <ul>
+          <li><a href="#">Chính sách giao hàng</a></li>
+          <li><a href="#">Chính sách bảo hành</a></li>
+          <li><a href="#">Chính sách bảo mật</a></li>
+          <li><a href="#">Chính sách đổi trả</a></li>
+          <li><a href="#">Chính sách kiểm hàng</a></li>
+        </ul>
+      </div>
+
+      <!-- Cột 4 -->
+      <div>
+        <h4>HỖ TRỢ KHÁCH HÀNG</h4>
+        <ul>
+          <li><a href="#">Hướng dẫn mua hàng</a></li>
+          <li><a href="#">Hướng dẫn thanh toán</a></li>
+          <li><a href="#">Quy định mua hàng</a></li>
+          <li><a href="#">Quy trình tiếp nhận khiếu nại</a></li>
+          <li><a href="#">Quản lý giỏ hàng</a></li>
+        </ul>
+        <h4>KẾT NỐI VỚI CHÚNG TÔI</h4>
+        <div class="social-icons">
+          <a href="#"><img src="https://cdn.gumic.vn/frontend/gumicvn/images/social_face.png" alt="facebook" /></a>
+          <a href="#"><img src="https://cdn.gumic.vn/frontend/gumicvn/images/social_you.png" alt="youtube" /></a>
+        </div>
+        <h4>PHƯƠNG THỨC THANH TOÁN</h4>
+        <div class="payment-methods">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/money.png" alt="Tiền mặt" />
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/bank-card-back-side.png" alt="Internet Banking" />
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom"></div>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Literata:opsz,wght@0..72,400;0..72,700&display=swap');
+
+/* Container chính */
+.Home_container {
+  /* Sử dụng một ảnh nền tinh tế hơn */
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/About_Image.jpg') center/cover no-repeat;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  color: #ffffff;
+}
+
+/* Tiêu đề "RILASSATI" */
+.Home_container h1 {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(3.5rem, 12vw, 8rem); /* Kích thước linh hoạt */
+  font-weight: 700;
+  letter-spacing: 1.5rem;
+  margin: 0;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+  animation: fadeInDown 1.5s ease-out;
+}
+
+/* Subtitle */
+.subtitle {
+  font-family: "Literata", serif;
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  letter-spacing: .3rem;
+  font-weight: 400;
+  margin: 1.5rem 0;
+  text-transform: uppercase;
+  animation: fadeInUp 1.5s ease-out;
+}
+
+/* Nút "Khám phá ngay!" */
+.explore {
+  font-family: "Literata", serif;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-weight: 700;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 2rem;
+  animation: fadeInUp 1.5s ease-out 0.5s;
+  animation-fill-mode: backwards; /* Bắt đầu animation trễ hơn */
+}
+
+.explore:hover {
+  background-color: #ffffff;
+  color: #000000;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.explore::after {
+  content: "→";
+  font-size: 1.5em;
+  transition: transform 0.3s ease;
+}
+
+.explore:hover::after {
+  transform: translateX(5px);
+}
+
+.explore a{
+  text-decoration: none;
+  color: inherit;
+}
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .Home_container h1 {
+    letter-spacing: 1rem;
+  }
+
+  .explore {
+    padding: 0.8rem 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .Home_container {
+    padding: 1rem;
+  }
+
+  .Home_container h1 {
+    letter-spacing: 0.5rem;
+  }
+
+  .subtitle {
+    margin: 1rem 0;
+  }
+
+  .explore {
+    margin-top: 1.5rem;
+    padding: 0.7rem 1.5rem;
+  }
+}

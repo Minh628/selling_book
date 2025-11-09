@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý khách hàng</title>
+    <link rel="stylesheet" href="admin_global.css" />
+    <link rel="stylesheet" href="sidebar.css" />
+    <link rel="stylesheet" href="customer.css" />
+    <link rel="stylesheet" href="responsive.css" />
+    <script src="auth.js" defer></script>
+    <script src="customer.js" defer></script>
+    <script src="sidebar.js" defer></script>
+    <script src="admin_login.js" defer></script>
+</head>
+
+<body>
+    <button class="menu-toggle">☰</button>
+    <div class="admin_container">
+        <aside class="admin_sidebar">
+            <div>
+                <h1>Bảng quản lý Admin</h1>
+            </div>
+            <div class="admin_menu">
+                <ul>
+                    <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                    <li><a href="products.html" class="nav-link">Sản phẩm</a></li>
+                    <li><a href="orders.html" class="nav-link">Đơn hàng</a></li>
+                    <li><a href="categories.html" class="nav-link">Danh mục</a></li>
+                    <li>
+                        <a href="customer.html" class="nav-link active">Khách hàng</a>
+                    </li>
+                    <li><a href="inventory.html" class="nav-link">Kho hàng</a></li>
+                    <li><a href="stockin.html" class="nav-link">Nhập hàng</a></li>
+                    <li>
+                        <a href="manage-price.html" class="nav-link">Quản lý giá bán</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="sidebar-footer">
+                <h2>Xin chào Admin!</h2>
+                <button class="btn-logout">Đăng xuất</button>
+            </div>
+        </aside>
+
+        <main class="admin_main">
+            <div class="customer-header">
+                <h1>Quản lý khách hàng</h1>
+                <input type="text" id="searchInput" placeholder="🔍 Tìm kiếm khách hàng..." />
+            </div>
+            <div class="table-container">
+                <table id="customerTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Họ và tên</th>
+                            <th>User Name</th>
+                            <th>Mật Khẩu</th>
+                            <th>Trạng thái</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Nội dung render bằng JS -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <!-- ✅ Đóng admin_container -->
+
+    <!-- Popup xác nhận -->
+    <div class="popup" id="popupConfirm">
+        <div class="popup-content">
+            <h3 id="popupTitle">Xác nhận</h3>
+            <p id="popupMessage"></p>
+            <div class="popup-actions">
+                <button id="confirmYes" class="btn btn-confirm">Đồng ý</button>
+                <button id="confirmNo" class="btn btn-cancel">Hủy</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

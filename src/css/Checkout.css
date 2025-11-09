@@ -1,0 +1,226 @@
+body {
+  font-family: "Cinzel", serif;
+  background-color: #fff8e1;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 95%;
+  max-width: 1300px;
+  margin: 70px auto;
+  background-color: #fff8e1;
+  padding-bottom: 20px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.container hr {
+  border: 1px solid #000;
+  margin-bottom: 20px;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+/* Địa chỉ giao hàng */
+.address {
+  width: 50%;
+}
+
+.address h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+label {
+  font-size: 16px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+input[type="text"] {
+  display: block;
+  width: 90%;
+  margin-top: 5px;
+  padding: 10px;
+  border: none;
+  border-radius: 14px;
+  outline: none;
+}
+
+h3 {
+  text-align: center;
+  font-size: 22px;
+  margin-top: 60px;
+}
+
+/* Phương thức thanh toán */
+.payment-methods {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 15px 17px 15px 0px;
+}
+
+.method {
+  width: 80px;
+  height: 80px;
+  border-radius: 15px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.method:hover {
+  transform: translateY(-5px);
+}
+
+.method.cod {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9de68;
+  text-align: center;
+}
+
+.method.selected {
+  outline: 2px solid #000;
+  transform: scale(1.05);
+}
+
+#cardNumber {
+  margin-top: 15px;
+  display: none;
+}
+
+#confirmBtn {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 45px;
+  border-radius: 20px;
+  border: none;
+  background-color: #ffc05f;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#confirmBtn:hover {
+  background-color: #ff9f10;
+}
+
+/* Chi tiết hóa đơn */
+.invoice-details {
+  border: 3px solid black;
+  border-radius: 8px;
+  width: 50%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  height: 400px; /* khung cố định */
+}
+
+.invoice-details-header {
+  text-align: center;
+}
+
+.invoice-header {
+  display: flex;
+  padding: 8px 12px;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #fff9e6;
+}
+
+/* Danh sách sản phẩm cuộn */
+.invoice-items {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 350px;
+}
+
+.invoice-item {
+  display: flex;
+  padding: 8px 12px;
+  border-bottom: 1px solid black;
+}
+
+.product-name {
+  flex: 2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-price {
+  flex: 1;
+  text-align: right;
+}
+
+.product-qty {
+  flex: 0.3;
+  text-align: center;
+}
+
+.invoice-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 12px;
+  font-weight: bold;
+  font-size: 16px;
+  color: rgb(255, 68, 68);
+  border-top: 2px solid black;
+  background-color: #ffd699;
+}
+
+/* Tô màu xen kẽ cho từng hàng sản phẩm */
+.invoice-item:nth-child(odd) {
+  background-color: #ffffff; /* màu nhạt hơn nền chung */
+}
+
+.invoice-item:nth-child(even) {
+  background-color: #fff9e6; /* trắng cho dòng kế */
+}
+
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .address h2 {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .address {
+    width: 100%;
+  }
+
+  input[type="text"] {
+    width: 95%;
+  }
+
+  #confirmBtn {
+    padding: 10px 35px;
+    font-size: 14px;
+  }
+
+  .invoice-details {
+    margin-left: 10px;
+    width: 95%;
+  }
+}

@@ -1,0 +1,122 @@
+/* ==== Reset & Cơ bản ==== */
+
+body {
+    background-color: #f4f8ff;
+    color: #212121;
+    margin: 0;
+}
+
+.admin_main {
+    padding: 30px;
+}
+
+/* ==== Header ==== */
+.customer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.customer-header h1 {
+    color: #0d47a1;
+}
+
+.customer-header input {
+    padding: 8px 15px;
+    border-radius: 8px;
+    border: 1px solid #90caf9;
+    outline: none;
+    font-size: 14px;
+    width: 250px;
+    transition: 0.3s;
+}
+
+.customer-header input:focus {
+    border-color: #1976d2;
+    box-shadow: 0 0 5px #64b5f6;
+}
+
+/* ==== Nút ==== */
+.btn {
+    border: none;
+    padding: 7px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+    color: white;
+    font-size: 13px;
+    margin: 0 3px;
+}
+
+.btn-reset {
+    background-color: #42a5f5;
+}
+
+.btn-reset:hover {
+    background-color: #1e88e5;
+}
+
+.btn-lock {
+    background-color: #ef5350;
+}
+
+.btn-lock:hover {
+    background-color: #e53935;
+}
+
+.btn-unlock {
+    background-color: #43a047;
+}
+
+.btn-unlock:hover {
+    background-color: #2e7d32;
+}
+
+/* ==== Popup ==== */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 25px 30px;
+    border-radius: 10px;
+    width: 350px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.popup h3 {
+    color: #0d47a1;
+    margin-bottom: 10px;
+}
+
+.popup-actions {
+    margin-top: 20px;
+}
+
+.btn-confirm {
+    background-color: #1976d2;
+}
+
+.btn-confirm:hover {
+    background-color: #0d47a1;
+}
+
+.btn-cancel {
+    background-color: #9e9e9e;
+}
+
+.btn-cancel:hover {
+    background-color: #616161;
+}
