@@ -79,6 +79,6 @@ signUpButton.addEventListener("click", function() {
   localStorage.setItem("users", JSON.stringify(users));
 
   alert("Sign up successful!");
-  window.location.href = "loginPage.html";
+  window.location.href = "logInPage.html";
 });
 
