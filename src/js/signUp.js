@@ -1,37 +1,32 @@
 var toggle = document.getElementById("eyeIcon-Password");
 var password = document.getElementById("password");
 
-toggle.onclick = function() {
-  if ( password.type === "password"){
+toggle.onclick = function () {
+  if (password.type === "password") {
     password.type = "text";
     toggle.classList.remove("fa-eye-slash");
     toggle.classList.add("fa-eye");
-  }
-  else {
+  } else {
     password.type = "password";
-    toggle.classList.remove("fa-eye");   
-    toggle.classList.add("fa-eye-slash")
+    toggle.classList.remove("fa-eye");
+    toggle.classList.add("fa-eye-slash");
   }
-}
-
+};
 
 var toggleRepeat = document.getElementById("eyeIcon-repeatPassword");
-var passwordRepeat = document.getElementById("passwordRepeat")
+var passwordRepeat = document.getElementById("passwordRepeat");
 
-toggleRepeat.onclick = function() {
-  if ( passwordRepeat.type === "password"){
+toggleRepeat.onclick = function () {
+  if (passwordRepeat.type === "password") {
     passwordRepeat.type = "text";
     toggleRepeat.classList.remove("fa-eye-slash");
     toggleRepeat.classList.add("fa-eye");
-  }
-  else {
+  } else {
     passwordRepeat.type = "password";
-    toggleRepeat.classList.remove("fa-eye");   
-    toggleRepeat.classList.add("fa-eye-slash")
+    toggleRepeat.classList.remove("fa-eye");
+    toggleRepeat.classList.add("fa-eye-slash");
   }
-} 
-
-
+};
 
 const usernameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
@@ -39,7 +34,7 @@ const passwordRepeatInput = document.getElementById("passwordRepeat");
 const signUpButton = document.getElementById("signUpButton");
 
 //hàm thực thi khi click vào nút sign up
-signUpButton.addEventListener("click", function() {
+signUpButton.addEventListener("click", function () {
   const username = usernameInput.value;
   const password = passwordInput.value;
   const passwordRepeat = passwordRepeatInput.value;
@@ -58,7 +53,7 @@ signUpButton.addEventListener("click", function() {
   //tạo mảng users theo dữ liệu trong local storage, nếu chưa có thì tạo mảng rỗng
   let users = JSON.parse(localStorage.getItem("users")) || [];
 
-  if (users.some(user => user.username === username)) {
+  if (users.some((user) => user.username === username)) {
     alert("Username already exists!");
     return;
   }
@@ -73,7 +68,7 @@ signUpButton.addEventListener("click", function() {
     city: "",
     nation: "",
     status: "active",
-    orderData: []
+    orderData: [],
   };
   users.push(newUser);
   localStorage.setItem("users", JSON.stringify(users));
@@ -81,4 +76,3 @@ signUpButton.addEventListener("click", function() {
   alert("Sign up successful!");
   window.location.href = "logInPage.html";
 });
-

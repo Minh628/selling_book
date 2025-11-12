@@ -9,26 +9,27 @@
 /* 1. IMPORTS */
 @import url("admin_global.css");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 
 /* 2. MAIN SIDEBAR STYLING */
 .admin_sidebar {
+    font-family: "Poppins", sans-serif; /* UNIFIED FONT */
     width: 250px;
     background-color: #111827;
-    /* Darker, more modern background */
     height: 100vh;
     position: sticky;
     top: 0;
     display: flex;
     flex-direction: column;
     padding: 1rem;
-    /* Removed transition: transform 0.3s ease-in-out; */
     z-index: 1000;
     border-right: 1px solid #1f2937;
 }
 
 /* 3. HEADER & LOGO */
 .admin_sidebar h1 {
-    font-family: "Poppins", sans-serif;
+    font-family: "Poppins", sans-serif; /* Explicitly set font */
     font-size: 1.6rem;
     color: #f9fafb;
     text-align: center;
@@ -53,37 +54,31 @@
 }
 
 .admin_menu a {
+    font-family: "Poppins", sans-serif; /* Explicitly set font */
     display: flex;
-    /* Use flexbox for icon alignment */
     align-items: center;
     width: 100%;
-    /* Make all links take up the full width */
     box-sizing: border-box;
-    /* Include padding in the width calculation */
     padding: 14px 18px;
     border-radius: 8px;
     text-decoration: none;
     color: #d1d5db;
-    /* Lighter gray for text */
     font-weight: 500;
+    font-size: 0.95rem; /* UNIFIED FONT SIZE */
     transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
     position: relative;
-    /* For pseudo-elements */
 }
 
 .admin_menu a:hover {
     background-color: #1f2937;
     color: #f9fafb;
     transform: translateX(4px);
-    /* Subtle nudge on hover */
 }
 
 .admin_menu a.active {
     background-color: #0055ff;
-    /* A vibrant blue for active state */
     color: #ffffff;
     font-weight: 500;
-    /* Keep font-weight consistent */
     box-shadow: 0 4px 12px rgba(0, 85, 255, 0.2);
 }
 
@@ -91,58 +86,39 @@
 .admin_menu a::before {
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
-    /* Use FA's solid style */
     font-size: 1rem;
     width: 35px;
-    /* Fixed width for alignment */
     display: inline-block;
     text-align: center;
     margin-right: 5px;
     color: inherit;
-    /* Icon color matches link color */
 }
 
 /* Assigning icons to each link based on its href */
 .admin_menu a[href="dashboard.html"]::before {
     content: "\f0e4";
 }
-
-/* Dashboard */
 .admin_menu a[href="products.html"]::before {
     content: "\f1b2";
 }
-
-/* Cube for Products */
 .admin_menu a[href="orders.html"]::before {
     content: "\f291";
 }
-
-/* Shopping Basket */
 .admin_menu a[href="categories.html"]::before {
     content: "\f02c";
 }
-
-/* Tags */
 .admin_menu a[href="customer.html"]::before {
     content: "\f0c0";
 }
-
-/* Users */
 .admin_menu a[href="inventory.html"]::before {
     content: "\f494";
 }
-
-/* Warehouse */
 .admin_menu a[href="stockin.html"]::before {
     content: "\f472";
 }
-
-/* Dolly */
 .admin_menu a[href="manage-price.html"]::before {
     content: "\f155";
 }
-
-/* Dollar Sign */
 
 /* 6. FOOTER & LOGOUT BUTTON */
 .sidebar-footer {
@@ -154,7 +130,6 @@
 
 .sidebar-footer h2 {
     display: none;
-    /* Hide the "Xin chào Admin!" text for a cleaner look */
 }
 
 .btn-logout {
@@ -179,12 +154,10 @@
     color: #ffffff;
 }
 
-/* Add logout icon */
 .btn-logout::before {
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
     content: "\f2f5";
-    /* sign-out-alt */
     margin-right: 10px;
 }
 

@@ -1,13 +1,3 @@
-/* === IMPORT GIAO DIỆN TỪ MANAGE-PRICE.CSS === */
-
-/* === CÀI ĐẶT CHUNG === */
-body {
-    font-family: "Poppins", sans-serif;
-    margin: 0;
-    background: #f5f9ff;
-    color: #333;
-}
-
 /* === LAYOUT CHÍNH === */
 .admin_main {
     flex: 1;
@@ -15,9 +5,14 @@ body {
 }
 
 .admin_main h1 {
-    color: #1e88e5;
-    font-size: 26px;
+    font-family: 'Poppins', sans-serif;
+    color: #1f2937;
+    font-size: 30px;
+    font-weight: 700;
     margin-top: 0;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 /* === BỘ LỌC (GIỐNG MANAGE-PRICE) === */
@@ -182,6 +177,34 @@ body {
     border-color: #1976d2;
 }
 
+.pagination-item.active a {
+  font-weight: bold;
+  cursor: default;
+}
+
+/* === BỔ SUNG STYLES === */
+
+/* Style cho input[type="file"] để trông giống các input khác */
+input[type="file"]#edit-image {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box; /* Đảm bảo padding không làm vỡ layout */
+  background-color: #fff;
+  line-height: 1.5;
+}
+
+/* Style cho ảnh xem trước */
+#edit-image-preview {
+  display: none; /* Ẩn mặc định */
+  max-width: 100px;
+  height: auto;
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  object-fit: cover;
+}
 /* === NEW DRAWER UI === */
 .popup-overlay {
   position: fixed;

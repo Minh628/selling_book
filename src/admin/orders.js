@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const matchDate =
                 (!start || orderDate >= start) &&
-                (!end || orderDate <= new Date(end.getTime() + 86400000 - 1));
+                (!end || orderDate <= end);
 
             return matchKeyword && matchStatus && matchDate;
         });

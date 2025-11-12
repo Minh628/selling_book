@@ -1,4 +1,53 @@
-/* General Table Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* =================================
+   GLOBAL TYPOGRAPHY & BASE STYLES
+   ================================= */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f7fc;
+    color: #333;
+    margin: 0;
+}
+
+/* --- Unified Header Styles --- */
+.admin_main > h1 {
+    font-family: 'Poppins', sans-serif;
+    color: #1f2937;
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+h2, h3, h4, h5, h6 {
+    color: #111827; /* Darker, more professional color */
+    font-weight: 600;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+p, label, span, div {
+    font-size: 16px;
+    color: #374151; /* Slightly softer than pure black */
+}
+
+/* =================================
+   GENERAL TABLE STYLES
+   ================================= */
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -6,7 +55,8 @@ table {
   font-size: 1rem;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  border: 1px solid #e5e7eb;
 }
 
 thead {
@@ -17,14 +67,16 @@ thead {
 th, td {
   padding: 1rem;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 th {
   font-weight: 600;
   text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.5px;
 }
 
 tbody tr:hover {
-  background-color: #f1faff;
+  background-color: #f9fafb;
 }

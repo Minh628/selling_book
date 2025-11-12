@@ -146,6 +146,15 @@ document.addEventListener("DOMContentLoaded", () => {
       alert(`🔓 Đã mở khóa tài khoản của ${selectedCustomer.name}`);
     }
 
+    // Nếu user này đang đăng nhập ở phía end-user → đăng xuất ngay
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if (currentUser && currentUser.username === selectedCustomer.userName) {
+      // Nếu bị khóa hoặc đổi mật khẩu
+      if (selectedAction === "lock" || selectedAction === "reset") {
+        localStorage.removeItem("currentUser");
+      }
+    }
+
     // SỬA LỖI: Chỉ lưu lại localStorage KHI CÓ THAY ĐỔI
     saveData();
     renderCustomers(customers); // Render lại với dữ liệu đã cập nhật

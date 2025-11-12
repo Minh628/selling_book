@@ -178,7 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
         popupPrice.textContent = new Intl.NumberFormat("vi-VN", {
           style: "currency",
           currency: "VND",
-        }).format(book.price);
+        }).format(book.price);  
       } else {
         popupPrice.textContent = "Chưa có giá";
       }

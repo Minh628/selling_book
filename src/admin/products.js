@@ -25,7 +25,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const quantityInputGroup = document.getElementById("quantity-input-group");
   const quantityRealHint = document.getElementById("quantity-real-hint");
   const quantityDisplay = document.getElementById("edit-quantity-display");
-  const quantityDisplayGroup = document.getElementById("quantity-display-group");
+  const quantityDisplayGroup = document.getElementById(
+    "quantity-display-group"
+  );
+  const imagePreview = document.getElementById("edit-image-preview");
+  const saveButton = modalOverlay.querySelector(".btn-save");
 
   // === STATE ===
   let books = [];
@@ -35,10 +39,16 @@ document.addEventListener("DOMContentLoaded", () => {
   let allOrders = [];
   let productSellingPrices = {};
 
+  // SỬA LỖI GIÁ: Thêm các biến lợi nhuận
+  let productProfitRates = {};
+  let categoryProfitRates = {};
+  let globalProfitRate = 20;
+
+
   let currentPage = 1;
   const ITEMS_PER_PAGE = 5;
 
-  // --- 1. DATA LOADING ---
+  // --- 1. DATA LOADING (SỬA LỖI GIÁ) ---
   function loadDataFromLocalStorage() {
     books = JSON.parse(localStorage.getItem("books")) || [];
     categories = JSON.parse(localStorage.getItem("categories")) || [];
@@ -47,6 +57,14 @@ document.addEventListener("DOMContentLoaded", () => {
     allOrders = JSON.parse(localStorage.getItem("Orders")) || [];
     productSellingPrices =
       JSON.parse(localStorage.getItem("productSellingPrices")) || {};
+
+    // SỬA: Load dữ liệu lợi nhuận (giống hệt manage-price.js)
+    const storedGlobal = localStorage.getItem("globalProfitRate");
+    globalProfitRate = storedGlobal !== null ? JSON.parse(storedGlobal) : 20;
+    categoryProfitRates =
+      JSON.parse(localStorage.getItem("categoryProfitRates")) || {};
+    productProfitRates =
+      JSON.parse(localStorage.getItem("productProfitRates")) || {};
   }
 
   function saveDataToLocalStorage() {
@@ -54,6 +72,28 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // --- 2. CORE LOGIC (CALCULATION) ---
+
+  // --- SỬA LỖI GIÁ: Bổ sung 2 hàm tính giá (copy từ manage-price.js) ---
+  function getEffectiveProfit(product) {
+    if (!product) return globalProfitRate;
+    const { name, category } = product;
+    if (productProfitRates.hasOwnProperty(name))
+      return productProfitRates[name];
+    if (categoryProfitRates.hasOwnProperty(category))
+      return categoryProfitRates[category];
+    return globalProfitRate;
+  }
+
+  function calculateSellingPrice(product) {
+    if (!product) return 0;
+    const profitPercent = getEffectiveProfit(product);
+    const cost = product.cost || 0;
+    const rawPrice = cost + (cost * profitPercent) / 100;
+    return Math.round(rawPrice / 1000) * 1000;
+  }
+  // --- KẾT THÚC SỬA LỖI GIÁ ---
+
+
   function calculatePhysicalStock(productName) {
     const normalizedName = productName.toLowerCase().trim();
     if (!normalizedName) return 0;
@@ -71,8 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .filter((order) => order.status !== "cancelled")
       .flatMap((order) => order.items || [])
       .filter(
-        (item) =>
-          item.name && item.name.toLowerCase().trim() === normalizedName
+        (item) => item.name && item.name.toLowerCase().trim() === normalizedName
       )
       .reduce((sum, item) => sum + (item.qty || 0), 0);
 
@@ -99,7 +138,32 @@ document.addEventListener("DOMContentLoaded", () => {
     }).format(n);
   }
 
-  // --- 3. RENDERING ---
+  function getSafeImageUrl(imageString) {
+    if (!imageString) {
+      return "https://placehold.co/50x50/eee/aaa?text=No+Img";
+    }
+    if (imageString.startsWith("data:image")) {
+      return imageString;
+    }
+    if (imageString.startsWith("./")) {
+      return `../${imageString.substring(2)}`;
+    }
+    if (imageString.startsWith("/")) {
+      return `..${imageString}`;
+    }
+    return `../${imageString}`;
+  }
+
+  function readFileAsDataURL(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // --- 3. RENDERING (SỬA LỖI GIÁ) ---
   function renderProducts() {
     loadDataFromLocalStorage();
     const nameFilter = searchNameInput.value.toLowerCase();
@@ -125,34 +189,31 @@ document.addEventListener("DOMContentLoaded", () => {
     const paginatedItems = items.slice(start, end);
 
     paginatedItems.forEach((book) => {
-      const currentPrice = productSellingPrices[book.title] || book.price;
-      book.price = currentPrice;
+      let currentPrice = productSellingPrices[book.title];
+      if (currentPrice === undefined) {
+        const masterProduct = masterProducts.find(p => p.name === book.title);
+        currentPrice = calculateSellingPrice(masterProduct);
+      }
+      book.price = currentPrice || 0;
 
       const row = document.createElement("tr");
       row.setAttribute("data-id", book.id);
-      const imageUrl = book.image.startsWith("./")
-        ? `../${book.image.substring(2)}`
-        : book.image.startsWith("/")
-        ? `..${book.image}`
-        : `../${book.image}`;
+      const imageUrl = getSafeImageUrl(book.image);
 
       row.innerHTML = `
         <td>${book.id}</td>
-        <td><img src="${imageUrl}" alt="${
-        book.title
-      }" width="50" onerror="this.src='https://placehold.co/50x50/eee/aaa?text=Error'"></td>
+        <td><img src="${imageUrl}" alt="${book.title
+        }" width="50" onerror="this.src='https://placehold.co/50x50/eee/aaa?text=Error'"></td>
         <td>${book.title}</td>
         <td>${book.category}</td>
         <td>${formatCurrency(currentPrice)}</td>
         <td>${book.quantity}</td>
-        <td><span class="status-${book.status.toLowerCase()}">${
-        book.status
-      }</span></td>
+        <td><span class="status-${book.status.toLowerCase()}">${book.status
+        }</span></td>
         <td class="action-buttons">
             <button class="btn-edit">Chỉnh sửa</button>
-            <button class="btn-toggle-status">${
-              book.status === "Visible" ? "Ẩn" : "Hiện"
-            }</button>
+            <button class="btn-toggle-status">${book.status === "Visible" ? "Ẩn" : "Hiện"
+        }</button>
             <button class="btn-delete">Xóa</button>
         </td>
       `;
@@ -187,22 +248,48 @@ document.addEventListener("DOMContentLoaded", () => {
     return button;
   }
 
+  /**
+   * SỬA LỖI: Thêm logic Fallback nếu 'categories' chưa được tạo
+   */
   function loadAdminCategories() {
-    loadDataFromLocalStorage();
-    const visibleCategories = categories.filter((cat) => cat.visible);
+    loadDataFromLocalStorage(); // Đảm bảo 'categories' và 'masterProducts' đã được tải
+
+    let categoriesToDisplay = [];
+
+    if (categories.length > 0) {
+      // CÁCH 1: (Chuẩn) Dùng 'categories' nếu nó tồn tại
+      categoriesToDisplay = categories.map(cat => ({
+        value: cat.name,
+        text: cat.visible ? cat.name : `${cat.name} (Đã ẩn)`
+      }));
+    } else {
+      // CÁCH 2: (FALLBACK) Dùng 'masterProducts'
+      console.warn("Chưa tạo 'categories'. Tự tạo danh sách tạm thời từ 'products' (admin).");
+      const tempCategoryNames = [
+        ...new Set(masterProducts.map(p => p.category).filter(Boolean))
+      ];
+
+      categoriesToDisplay = tempCategoryNames.map(name => ({
+        value: name,
+        text: name // Không có '(Đã ẩn)' vì đây là fallback
+      }));
+    }
+
+    // Sắp xếp theo ABC
+    categoriesToDisplay.sort((a, b) => a.text.localeCompare(b.text));
 
     searchCategorySelect.innerHTML =
       '<option value="all">Tất cả danh mục</option>';
 
-    visibleCategories.forEach((cat) => {
+    categoriesToDisplay.forEach((cat) => {
       const option = document.createElement("option");
-      option.value = cat.name;
-      option.textContent = cat.name;
-      searchCategorySelect.appendChild(option.cloneNode(true));
+      option.value = cat.value;
+      option.textContent = cat.text;
+      searchCategorySelect.appendChild(option);
     });
   }
 
-  // --- 4. DRAWER LOGIC ---
+  // --- 4. DRAWER LOGIC (SỬA LỖI GIÁ) ---
   function openDrawerForAdd() {
     loadDataFromLocalStorage();
     modalTitle.textContent = "Thêm sản phẩm mới";
@@ -216,6 +303,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     titleSelect.required = true;
     quantityInput.required = true;
+    imagePreview.style.display = "none";
+    imagePreview.src = "";
+    imageInput.value = null;
 
     categoryDisplay.textContent = "-";
     priceDisplay.textContent = "-";
@@ -242,9 +332,8 @@ document.addEventListener("DOMContentLoaded", () => {
     availableProducts.forEach((item) => {
       const option = document.createElement("option");
       option.value = item.name;
-      option.textContent = `${
-        item.name
-      } (Có thể thêm: ${calculateAvailableStock(item.name)})`;
+      option.textContent = `${item.name
+        } (Có thể thêm: ${calculateAvailableStock(item.name)})`;
       titleSelect.appendChild(option);
     });
 
@@ -270,14 +359,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     titleStatic.value = product.title;
     categoryDisplay.textContent = product.category;
-    priceDisplay.textContent = formatCurrency(
-      productSellingPrices[product.title] || product.price
-    );
-    quantityDisplay.textContent = product.quantity;
 
+    let currentPrice = productSellingPrices[product.title];
+    if (currentPrice === undefined) {
+      const masterProduct = masterProducts.find(p => p.name === product.title);
+      currentPrice = calculateSellingPrice(masterProduct);
+    }
+    priceDisplay.textContent = formatCurrency(currentPrice || 0);
+
+    quantityDisplay.textContent = product.quantity;
     authorInput.value = product.author || "";
     descriptionInput.value = product.description || "";
-    imageInput.value = product.image || "";
+    imageInput.value = null;
+    if (product.image) {
+      imagePreview.src = getSafeImageUrl(product.image);
+      imagePreview.style.display = "block";
+    } else {
+      imagePreview.style.display = "none";
+      imagePreview.src = "";
+    }
 
     modalOverlay.classList.add("active");
   }
@@ -286,13 +386,28 @@ document.addEventListener("DOMContentLoaded", () => {
     modalOverlay.classList.remove("active");
   }
 
-  // --- 5. EVENT LISTENERS ---
+  // --- 5. EVENT LISTENERS (SỬA LỖI GIÁ) ---
   addButton.addEventListener("click", openDrawerForAdd);
   closeButton.addEventListener("click", closeDrawer);
   cancelButton.addEventListener("click", closeDrawer);
   modalOverlay.addEventListener("click", (e) => {
     if (e.target === modalOverlay) {
       closeDrawer();
+    }
+  });
+
+  imageInput.addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      readFileAsDataURL(file)
+        .then((dataUrl) => {
+          imagePreview.src = dataUrl;
+          imagePreview.style.display = "block";
+        })
+        .catch((err) => {
+          console.error("Lỗi đọc file xem trước:", err);
+          imagePreview.style.display = "none";
+        });
     }
   });
 
@@ -308,7 +423,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const productInfo = masterProducts.find((p) => p.name === selectedName);
-    const sellingPrice = productSellingPrices[selectedName] || 0;
+
+    const sellingPrice = calculateSellingPrice(productInfo);
     const stock = calculateAvailableStock(selectedName);
 
     if (productInfo) {
@@ -317,6 +433,7 @@ document.addEventListener("DOMContentLoaded", () => {
       quantityRealHint.textContent = `Tồn kho thực tế: ${stock}`;
     }
   });
+
 
   productTableBody.addEventListener("click", (event) => {
     const target = event.target;
@@ -327,6 +444,17 @@ document.addEventListener("DOMContentLoaded", () => {
     if (target.classList.contains("btn-toggle-status")) {
       const product = books.find((p) => p.id === productId);
       if (product) {
+        const categoryObject = categories.find(
+          (cat) => cat.name === product.category
+        );
+        if (categoryObject && categoryObject.visible === false) {
+          if (product.status === "Hidden") {
+            alert(
+              `Không thể hiện sản phẩm này. Danh mục "${product.category}" đang bị ẩn.`
+            );
+            return;
+          }
+        }
         product.status = product.status === "Visible" ? "Hidden" : "Visible";
         saveDataToLocalStorage();
         renderProducts();
@@ -342,11 +470,32 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  editForm.addEventListener("submit", (event) => {
+  saveButton.addEventListener("click", async (event) => {
     event.preventDefault();
-    const editingId = editForm.getAttribute("data-editing-id");
+    if (!editForm.checkValidity()) {
+      editForm.reportValidity();
+      return;
+    }
 
     loadDataFromLocalStorage();
+
+    const editingId = editForm.getAttribute("data-editing-id");
+    const imageFile = imageInput.files[0];
+    let imageToSave = "";
+    let hasNewImage = false;
+
+    if (imageFile) {
+      const options = { maxSizeMB: 0.5, maxWidthOrHeight: 800, useWebWorker: true };
+      try {
+        const compressedFile = await imageCompression(imageFile, options);
+        imageToSave = await readFileAsDataURL(compressedFile);
+        hasNewImage = true;
+      } catch (err) {
+        console.error("Lỗi khi nén hoặc đọc file:", err);
+        alert("Đã xảy ra lỗi khi xử lý ảnh. Vui lòng thử lại.");
+        return;
+      }
+    }
 
     if (editingId) {
       // === EDIT MODE ===
@@ -354,7 +503,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (product) {
         product.author = authorInput.value;
         product.description = descriptionInput.value;
-        product.image = imageInput.value.replace(/^\.\//, "");
+        if (hasNewImage) {
+          product.image = imageToSave;
+        }
       }
     } else {
       // === ADD MODE ===
@@ -363,7 +514,6 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("Vui lòng chọn một sản phẩm từ kho.");
         return;
       }
-
       const realStock = calculateAvailableStock(title);
       const quantityToSell = parseInt(quantityInput.value, 10);
 
@@ -383,40 +533,73 @@ document.addEventListener("DOMContentLoaded", () => {
         (b) => b.title.toLowerCase().trim() === normalizedTitle
       );
 
+      const productInfo = masterProducts.find((p) => p.name === title);
+
+      const sellingPrice = calculateSellingPrice(productInfo);
+
       if (existingBook) {
         existingBook.quantity += quantityToSell;
+        existingBook.author = authorInput.value;
+        existingBook.description = descriptionInput.value;
+        if (hasNewImage) {
+          existingBook.image = imageToSave;
+        }
       } else {
         const maxId = books.reduce((max, b) => (b.id > max ? b.id : max), 0);
         const newId = maxId + 1;
-        const productInfo = masterProducts.find((p) => p.name === title);
-        const sellingPrice = productSellingPrices[title] || 0;
+        const productCategoryName = productInfo
+          ? productInfo.category
+          : "Không rõ";
+        const categoryObject = categories.find(
+          (cat) => cat.name === productCategoryName
+        );
+        const initialStatus =
+          categoryObject && categoryObject.visible === false
+            ? "Hidden"
+            : "Visible";
 
         const newProduct = {
           id: newId,
           title: title,
           author: authorInput.value,
           description: descriptionInput.value,
-          category: productInfo ? productInfo.category : "Không rõ",
+          category: productCategoryName,
           price: sellingPrice,
           quantity: quantityToSell,
-          image: imageInput.value.replace(/^\.\//, ""),
-          status: "Visible",
+          image: imageToSave,
+          status: initialStatus,
         };
         books.push(newProduct);
       }
     }
 
-    saveDataToLocalStorage();
-    renderProducts();
-    closeDrawer();
+    try {
+      saveDataToLocalStorage();
+      renderProducts();
+      closeDrawer();
+    } catch (e) {
+      if (e.name === "QuotaExceededError") {
+        alert(
+          "Lỗi: LocalStorage đã bị đầy! Kể cả sau khi nén ảnh, bạn cũng không còn đủ dung lượng."
+        );
+      } else {
+        alert("Đã xảy ra lỗi khi lưu: " + e.message);
+      }
+    }
   });
 
-  // Event Listeners
-  searchNameInput.addEventListener("input", renderProducts);
-  searchCategorySelect.addEventListener("change", renderProducts);
+  searchNameInput.addEventListener("input", () => {
+    currentPage = 1;
+    renderProducts();
+  });
+
+  searchCategorySelect.addEventListener("change", () => {
+    currentPage = 1;
+    renderProducts();
+  });
 
   // --- 6. INITIALIZATION ---
   loadDataFromLocalStorage();
-  loadAdminCategories();
+  loadAdminCategories(); // <-- Sửa lỗi nằm trong hàm này
   renderProducts();
 });

@@ -1,11 +1,3 @@
-/* ==== Reset & Cơ bản ==== */
-
-body {
-    background-color: #f4f8ff;
-    color: #212121;
-    margin: 0;
-}
-
 .admin_main {
     padding: 30px;
 }
@@ -19,7 +11,15 @@ body {
 }
 
 .customer-header h1 {
-    color: #0d47a1;
+    font-family: 'Poppins', sans-serif;
+    color: #1f2937;
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e5e7eb;
+    width: 100%; /* Ensure it takes full width */
 }
 
 .customer-header input {

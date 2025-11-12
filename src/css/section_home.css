@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Literata:opsz,wght@0..72,400;0..72,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Literata:opsz,wght@0..72,400;0..72,700&display=swap");
 
 /* Container chính */
 .Home_container {
   /* Sử dụng một ảnh nền tinh tế hơn */
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/About_Image.jpg') center/cover no-repeat;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../images/About_Image.jpg") center/cover no-repeat;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -16,7 +17,7 @@
 
 /* Tiêu đề "RILASSATI" */
 .Home_container h1 {
-  font-family: 'Cinzel', serif;
+  font-family: "Cinzel", serif;
   font-size: clamp(3.5rem, 12vw, 8rem); /* Kích thước linh hoạt */
   font-weight: 700;
   letter-spacing: 1.5rem;
@@ -30,7 +31,7 @@
 .subtitle {
   font-family: "Literata", serif;
   font-size: clamp(1rem, 3vw, 1.5rem);
-  letter-spacing: .3rem;
+  letter-spacing: 0.3rem;
   font-weight: 400;
   margin: 1.5rem 0;
   text-transform: uppercase;
@@ -73,7 +74,7 @@
   transform: translateX(5px);
 }
 
-.explore a{
+.explore a {
   text-decoration: none;
   color: inherit;
 }

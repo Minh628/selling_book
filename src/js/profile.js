@@ -51,7 +51,7 @@ if (orderData && orderData.length > 0) {
         <td>
           ${
         // SỬA: Chỉ cho phép hủy khi trạng thái là "Mới"
-        translated === "Mới"
+        (translated === "Mới" || translated === "Đang xử lý" || translated === "Đang giao")
         ? `<button onclick="event.stopPropagation(); cancelOrder('${order.id}')" class="cancel-btn">Hủy</button>`
         : ""
       }

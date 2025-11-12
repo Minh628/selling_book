@@ -17,8 +17,14 @@ body {
 }
 
 .admin_main h1 {
-    color: #1e88e5;
-    font-size: 26px;
+    font-family: 'Poppins', sans-serif;
+    color: #1f2937;
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .order_container {

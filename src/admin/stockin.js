@@ -41,33 +41,51 @@ document.addEventListener("DOMContentLoaded", () => {
     }).format(value);
   }
 
-  // --- 5. HÀM TẢI VÀ HIỂN THỊ (Giữ nguyên) ---
+  // --- 5. HÀM TẢI VÀ HIỂN THỊ ---
   function loadAllDataFromStorage() {
     allStockSlips = JSON.parse(localStorage.getItem("stockInSlips")) || [];
     allStockSlips.sort((a, b) => b.id.localeCompare(a.id));
   }
 
-  // Thay thế hàm loadCategoriesToModal cũ trong stockin.js
+  /**
+   * SỬA LỖI: Thêm logic Fallback nếu 'categories' chưa được tạo
+   */
+  function loadCategoriesToModal() {
+    let uniqueCategories = [];
 
-function loadCategoriesToModal() {
-  // SỬA: Đọc từ localStorage.categories đã được quản lý
-  const allCategories = JSON.parse(localStorage.getItem("categories")) || [];
-  
-  // Chỉ hiển thị các danh mục đang "visible"
-  const visibleCategories = allCategories
-    .filter(cat => cat.visible === true)
-    .map(cat => cat.name); 
-    
-  const uniqueCategories = [...new Set(visibleCategories)];
+    // 1. Thử đọc 'categories' (Nguồn chính)
+    const storedCategories = JSON.parse(localStorage.getItem("categories")) || [];
 
-  categorySelect.innerHTML = `<option value="">-- Chọn danh mục --</option>`;
-  uniqueCategories.forEach((cat) => {
-    const option = document.createElement("option");
-    option.value = cat;
-    option.textContent = cat;
-    categorySelect.appendChild(option);
-  });
-}
+    if (storedCategories.length > 0) {
+      // CÁCH 1: Dùng danh sách của Admin (đã lọc 'visible')
+      uniqueCategories = [
+        ...new Set(
+          storedCategories
+            .filter((cat) => cat.visible === true)
+            .map((cat) => cat.name)
+        ),
+      ];
+    } else {
+      // CÁCH 2: (FALLBACK) Tự tạo từ 'products' (danh mục gốc)
+      console.warn(
+        "Chưa tạo 'categories'. Tự tạo danh sách tạm thời từ 'products'."
+      );
+      const masterProducts =
+        JSON.parse(localStorage.getItem("products")) || [];
+      uniqueCategories = [
+        ...new Set(masterProducts.map((p) => p.category).filter(Boolean)),
+      ];
+    }
+
+    // 3. Render dropdown
+    categorySelect.innerHTML = `<option value="">-- Chọn danh mục --</option>`;
+    uniqueCategories.sort().forEach((cat) => {
+      const option = document.createElement("option");
+      option.value = cat;
+      option.textContent = cat;
+      categorySelect.appendChild(option);
+    });
+  }
 
   function getFilteredSlips() {
     const searchTerm = searchNameInput.value.toLowerCase();
@@ -120,13 +138,16 @@ function loadCategoriesToModal() {
                 data-id="${slip.id}"
                 ${isCompleted ? "disabled" : ""} 
               >
-                <option value="Chưa nhập" ${!isCompleted ? "selected" : ""
-          }>Chưa nhập</option>
-                <option value="Đã nhập" ${isCompleted ? "selected" : ""
-          }>Đã nhập</option>
+                <option value="Chưa nhập" ${
+                  !isCompleted ? "selected" : ""
+                }>Chưa nhập</option>
+                <option value="Đã nhập" ${
+                  isCompleted ? "selected" : ""
+                }>Đã nhập</option>
               </select>
-              <button class="stockin-edit-btn" data-id="${slip.id
-          }" style="display: none;">Lưu</button>
+              <button class="stockin-edit-btn" data-id="${
+                slip.id
+              }" style="display: none;">Lưu</button>
             </div>
           </td>
           <td>
@@ -134,8 +155,9 @@ function loadCategoriesToModal() {
               class="stockin-btn-edit-details" 
               data-id="${slip.id}"
               ${isCompleted ? "disabled" : ""} 
-              title="${isCompleted ? "Không thể sửa phiếu đã nhập" : "Sửa chi tiết"
-          }"
+              title="${
+                isCompleted ? "Không thể sửa phiếu đã nhập" : "Sửa chi tiết"
+              }"
             >
               Sửa
             </button>
@@ -143,8 +165,9 @@ function loadCategoriesToModal() {
               class="stockin-btn-delete" 
               data-id="${slip.id}"
               ${isCompleted ? "disabled" : ""} 
-              title="${isCompleted ? "Không thể xóa phiếu đã nhập kho" : "Xóa phiếu"
-          }"
+              title="${
+                isCompleted ? "Không thể xóa phiếu đã nhập kho" : "Xóa phiếu"
+              }"
             >
               Xóa
             </button>
@@ -310,7 +333,7 @@ function loadCategoriesToModal() {
     const slipToEdit = allStockSlips.find((slip) => slip.id === slipId);
     if (!slipToEdit) return;
     editingSlipId = slipId;
-    loadCategoriesToModal();
+    loadCategoriesToModal(); // Hàm này đã được sửa
     productNameInput.value = slipToEdit.productName;
     unitPriceInput.value = slipToEdit.unitPrice;
     stockInput.value = slipToEdit.quantity;
@@ -342,7 +365,6 @@ function loadCategoriesToModal() {
 
     if (productInCatalog) {
       // 3a. SỬA: Nếu CÓ RỒI -> KHÔNG cập nhật giá vốn nữa.
-      // productInCatalog.cost = slipToUpdate.unitPrice; // Dòng này là LỖI, đã bị xóa.
     } else {
       // 3b. Nếu CHƯA có -> thêm vào catalog VÀ đặt giá vốn
       const newProduct = {
@@ -368,7 +390,7 @@ function loadCategoriesToModal() {
   addStockInBtn.addEventListener("click", () => {
     editingSlipId = null;
     modalTitle.textContent = "Tạo phiếu nhập hàng";
-    loadCategoriesToModal();
+    loadCategoriesToModal(); // Hàm này đã được sửa
     modalOverlay.style.display = "flex";
     dateInput.valueAsDate = new Date();
     modalForm.reset();

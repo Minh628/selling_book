@@ -1,8 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
   // --- 1. LẤY DOM ELEMENTS (SỬA LỖI) ---
-  const inventoryStartDateInput = document.getElementById("inventory-start-date"); // SỬA
-  const inventoryEndDateInput = document.getElementById("inventory-end-date");   // SỬA
-  const summaryEndDateDisplay = document.getElementById("summary-end-date-display"); // MỚI
+  const inventoryStartDateInput = document.getElementById(
+    "inventory-start-date"
+  ); // SỬA
+  const inventoryEndDateInput = document.getElementById("inventory-end-date"); // SỬA
+  const summaryEndDateDisplay = document.getElementById(
+    "summary-end-date-display"
+  ); // MỚI
   const totalStockDisplay = document.getElementById("total-stock-display");
   const inventoryTableBody = document.getElementById("inventoryTable");
   const searchInput = document.getElementById("searchInput");
@@ -24,8 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const parts = dateStr.split("/");
     if (parts.length !== 3) return null;
     const [day, month, year] = parts;
-    const isoMonth = month.padStart(2, '0');
-    const isoDay = day.padStart(2, '0');
+    const isoMonth = month.padStart(2, "0");
+    const isoDay = day.padStart(2, "0");
     return `${year}-${isoMonth}-${isoDay}`;
   }
 
@@ -55,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // --- 2. HÀM TÍNH TOÁN CỐT LÕI (SỬA LỖI) ---
-  
+
   // Đổi tên: Hàm này chỉ dùng để tính TỔNG TỒN KHO cho thẻ summary
   function calculatePhysicalStockAsOf(endDate) {
     loadData(); // Tải lại data mới nhất
@@ -69,7 +73,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalStockOut = allOrders
       .filter((order) => {
         const orderDateISO = convertDateToISO(order.date);
-        return order.status !== "cancelled" && orderDateISO && orderDateISO <= endDate;
+        return (
+          order.status !== "cancelled" &&
+          orderDateISO &&
+          orderDateISO <= endDate
+        );
       })
       .reduce((total, order) => {
         const orderTotalQuantity = (order.items || []).reduce(
@@ -80,6 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 0);
 
     const physicalStock = totalStockIn - totalStockOut;
+    console.log(physicalStock);
     return Math.max(0, physicalStock);
   }
 
@@ -131,19 +140,22 @@ document.addEventListener("DOMContentLoaded", () => {
             s.productName &&
             s.productName.toLowerCase().trim() === normalizedProductName &&
             s.status === "Đã nhập" &&
-            s.date >= startDate && s.date <= endDate // SỬA: Lọc theo khoảng
+            s.date >= startDate &&
+            s.date <= endDate // SỬA: Lọc theo khoảng
         )
         .reduce((sum, s) => sum + s.quantity, 0);
 
       // === TÍNH XUẤT TRONG KỲ ===
       const periodStockOut = allOrders
-        .filter(
-          (o) => {
-            const orderDateISO = convertDateToISO(o.date);
-            return o.status !== "cancelled" && orderDateISO &&
-                   orderDateISO >= startDate && orderDateISO <= endDate; // SỬA: Lọc theo khoảng
-          }
-        )
+        .filter((o) => {
+          const orderDateISO = convertDateToISO(o.date);
+          return (
+            o.status !== "cancelled" &&
+            orderDateISO &&
+            orderDateISO >= startDate &&
+            orderDateISO <= endDate
+          ); // SỬA: Lọc theo khoảng
+        })
         .flatMap((o) => o.items || [])
         .filter(
           (item) =>
@@ -152,34 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
         )
         .reduce((sum, item) => sum + (item.qty || 0), 0);
 
-      // === TÍNH TỒN KHO CUỐI KỲ (TÍNH ĐẾN `endDate`) ===
-      const totalStockIn = allStockInSlips
-        .filter(
-          (s) =>
-            s.productName &&
-            s.productName.toLowerCase().trim() === normalizedProductName &&
-            s.status === "Đã nhập" &&
-            s.date <= endDate // SỬA: Chỉ tính đến ngày cuối
-        )
-        .reduce((sum, s) => sum + s.quantity, 0);
-
-      const totalStockOut = allOrders
-        .filter(
-          (o) => {
-            const orderDateISO = convertDateToISO(o.date);
-            return o.status !== "cancelled" && orderDateISO &&
-                   orderDateISO <= endDate; // SỬA: Chỉ tính đến ngày cuối
-          }
-        )
-        .flatMap((o) => o.items || [])
-        .filter(
-          (item) =>
-            item.name &&
-            item.name.toLowerCase().trim() === normalizedProductName
-        )
-        .reduce((sum, item) => sum + (item.qty || 0), 0);
-      
-      const physicalStock = totalStockIn - totalStockOut;
+      const physicalStock = periodStockIn - periodStockOut;
       const totalStock = physicalStock; // Tồn cuối kỳ
 
       let status = "ok";
@@ -190,7 +175,15 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       // Trả về tên gốc và các giá trị TRONG KỲ
-      return { ...product, name: product.name, periodStockIn, periodStockOut, totalStock, status, physicalStock };
+      return {
+        ...product,
+        name: product.name,
+        periodStockIn,
+        periodStockOut,
+        totalStock,
+        status,
+        physicalStock,
+      };
     });
 
     const searchTerm = searchInput.value.toLowerCase();
@@ -199,7 +192,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const nameMatch = p.name.toLowerCase().trim().includes(searchTerm);
       const statusMatch = statusFilter === "all" || p.status === statusFilter;
       // SỬA: Lọc dựa trên Tồn cuối kỳ HOẶC có hoạt động trong kỳ
-      const isRelevant = p.physicalStock > 0 || p.periodStockIn > 0 || p.periodStockOut > 0;
+      const isRelevant =
+        p.physicalStock > 0 || p.periodStockIn > 0 || p.periodStockOut > 0;
       return nameMatch && statusMatch && isRelevant;
     });
 
@@ -290,9 +284,9 @@ document.addEventListener("DOMContentLoaded", () => {
     loadData(); // Tải data mới nhất
 
     const startDate = inventoryStartDateInput.value; // SỬA: Đọc ngày
-    const endDate = inventoryEndDateInput.value;   // SỬA: Đọc ngày
+    const endDate = inventoryEndDateInput.value; // SỬA: Đọc ngày
     if (!startDate || !endDate || endDate < startDate) return 0;
-    
+
     const uniqueProducts = getUniqueProductsFromSlips();
 
     const productsWithStock = uniqueProducts.map((product) => {
@@ -300,52 +294,74 @@ document.addEventListener("DOMContentLoaded", () => {
       const normalizedProductName = product.name.toLowerCase().trim();
 
       const periodStockIn = allStockInSlips
-        .filter(s =>
+        .filter(
+          (s) =>
             s.productName &&
             s.productName.toLowerCase().trim() === normalizedProductName &&
             s.status === "Đã nhập" &&
-            s.date >= startDate && s.date <= endDate
-        ).reduce((sum, s) => sum + s.quantity, 0);
+            s.date >= startDate &&
+            s.date <= endDate
+        )
+        .reduce((sum, s) => sum + s.quantity, 0);
 
       const periodStockOut = allOrders
-        .filter(o => {
-            const orderDateISO = convertDateToISO(o.date);
-            return o.status !== "cancelled" && orderDateISO &&
-                   orderDateISO >= startDate && orderDateISO <= endDate;
-          }
-        ).flatMap((o) => o.items || [])
-        .filter(item =>
+        .filter((o) => {
+          const orderDateISO = convertDateToISO(o.date);
+          return (
+            o.status !== "cancelled" &&
+            orderDateISO &&
+            orderDateISO >= startDate &&
+            orderDateISO <= endDate
+          );
+        })
+        .flatMap((o) => o.items || [])
+        .filter(
+          (item) =>
             item.name &&
             item.name.toLowerCase().trim() === normalizedProductName
-        ).reduce((sum, item) => sum + (item.qty || 0), 0);
+        )
+        .reduce((sum, item) => sum + (item.qty || 0), 0);
 
       const totalStockIn = allStockInSlips
-        .filter(s =>
+        .filter(
+          (s) =>
             s.productName &&
             s.productName.toLowerCase().trim() === normalizedProductName &&
             s.status === "Đã nhập" &&
             s.date <= endDate
-        ).reduce((sum, s) => sum + s.quantity, 0);
+        )
+        .reduce((sum, s) => sum + s.quantity, 0);
 
       const totalStockOut = allOrders
-        .filter(o => {
-            const orderDateISO = convertDateToISO(o.date);
-            return o.status !== "cancelled" && orderDateISO &&
-                   orderDateISO <= endDate;
-          }
-        ).flatMap((o) => o.items || [])
-        .filter(item =>
+        .filter((o) => {
+          const orderDateISO = convertDateToISO(o.date);
+          return (
+            o.status !== "cancelled" && orderDateISO && orderDateISO <= endDate
+          );
+        })
+        .flatMap((o) => o.items || [])
+        .filter(
+          (item) =>
             item.name &&
             item.name.toLowerCase().trim() === normalizedProductName
-        ).reduce((sum, item) => sum + (item.qty || 0), 0);
-      
+        )
+        .reduce((sum, item) => sum + (item.qty || 0), 0);
+
       const physicalStock = totalStockIn - totalStockOut;
       const totalStock = physicalStock;
       let status = "ok";
       if (physicalStock <= 0) status = "out";
       else if (physicalStock <= 10) status = "low";
 
-      return { ...product, name: product.name, periodStockIn, periodStockOut, totalStock, status, physicalStock };
+      return {
+        ...product,
+        name: product.name,
+        periodStockIn,
+        periodStockOut,
+        totalStock,
+        status,
+        physicalStock,
+      };
     });
 
     const searchTerm = searchInput.value.toLowerCase();
@@ -353,7 +369,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const filteredProducts = productsWithStock.filter((p) => {
       const nameMatch = p.name.toLowerCase().trim().includes(searchTerm);
       const statusMatch = statusFilter === "all" || p.status === statusFilter;
-      const isRelevant = p.physicalStock > 0 || p.periodStockIn > 0 || p.periodStockOut > 0;
+      const isRelevant =
+        p.physicalStock > 0 || p.periodStockIn > 0 || p.periodStockOut > 0;
       return nameMatch && statusMatch && isRelevant;
     });
     return filteredProducts.length;
@@ -365,8 +382,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const today = new Date();
     const todayISO = today.toISOString().split("T")[0];
     const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1)
-      .toISOString().split("T")[0];
-    
+      .toISOString()
+      .split("T")[0];
+
     inventoryStartDateInput.value = firstDayOfMonth;
     inventoryEndDateInput.value = todayISO;
 
