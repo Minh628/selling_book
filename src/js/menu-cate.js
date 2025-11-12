@@ -98,7 +98,7 @@ function getDynamicCategoryImage(categoryName) {
     return "./images/Đắc nhân tâm.jpg";
   }
   if (nameLower.includes("tâm linh")) {
-    return "./images/Hiểu về trái tim.webp";
+    return "./images/Hiểu Về Trái Tim.webp";
   }
   if (nameLower.includes("nuôi dạy con")) {
     return "./images/Để Con Được Ốm.jpg";
